@@ -11,7 +11,6 @@ export async function FetchAll(table) {
   return fetchAll(table);
 }
 export async function Insert(preveState, formData) {
-  console.log(formData);
   if (isInvalidText(formData.get("Title")))
     return { success: false, message: "Ungültig Title !!!" };
   if (isInvalidText(formData.get("Desc")))

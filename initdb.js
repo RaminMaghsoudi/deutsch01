@@ -8,7 +8,10 @@ db.prepare(
        Title TEXT NOT NULL,
        EN TEXT NOT NULL,
        FA TEXT NOT NULL,
-       Desc TEXT NOT NULL
+       Desc TEXT NOT NULL,
+       Tip TEXT NOT NULL,
+       Rule TEXT NOT NULL,
+       Example TEXT NOT NULL
     )
 `,
 ).run();
