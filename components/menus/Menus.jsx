@@ -9,7 +9,7 @@ import { IoMdArrowDropright } from "react-icons/io";
 import { RiTranslate2 } from "react-icons/ri";
 import { RiFunctionAddLine } from "react-icons/ri";
 
-const Menus = ({ contextMenu,  handleClose }) => {
+const Menus = ({ contextMenu, handleClose }) => {
   return (
     <Menu
       open={contextMenu !== null}
@@ -45,7 +45,7 @@ const Menus = ({ contextMenu,  handleClose }) => {
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      <MenuItem sx={{ fontFamily: "CL" }} onClick={handleClose}>
+      <MenuItem sx={{ fontFamily: "CL" }} onClick={() => handleClose("ADD")}>
         <RiFunctionAddLine />
         <span className={classess.Icon}>Titel erstellen</span>
       </MenuItem>

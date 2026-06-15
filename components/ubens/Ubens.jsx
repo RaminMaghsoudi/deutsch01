@@ -30,10 +30,13 @@ const Ubens = ({ fetchAll }) => {
       mouseY: event.clientY - 4,
     });
   };
-  const handleClose = () => {
+  const handleClose = (e) => {
     setContextMenu(null);
     setShowAddItems("IN");
+    if (e === "ADD") {
+    }
   };
+
   useEffect(() => {
     if (state.success) {
       setDesc("");
