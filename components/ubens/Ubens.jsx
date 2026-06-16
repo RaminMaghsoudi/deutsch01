@@ -1,24 +1,36 @@
 "use client";
 
 import { Box, Divider } from "@mui/material";
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useActionState, useEffect } from "react";
 import classess from "./Ubens.module.css";
 import { GiChestnutLeaf } from "react-icons/gi";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoMdCheckmark } from "react-icons/io";
 import { Insert } from "@/actions";
 import Menus from "../menus/Menus";
+import { useContexts } from "@/app/Context";
 
-const Ubens = ({ fetchAll }) => {
-  const [Title, setTitle] = useState("");
-  const [EN, setEN] = useState("");
-  const [FA, setFA] = useState("");
-  const [Desc, setDesc] = useState("");
-  const [Tip, setTip] = useState("");
-  const [Rule, setRule] = useState("");
-  const [Example, setExample] = useState("");
-  const [showAddItems, setShowAddItems] = useState("");
-  const [contextMenu, setContextMenu] = useState(null);
+const Ubens = ({ grouped }) => {
+  const {
+    Title,
+    setTitle,
+    EN,
+    setEN,
+    FA,
+    setFA,
+    Desc,
+    setDesc,
+    Tip,
+    setTip,
+    Rule,
+    setRule,
+    Example,
+    setExample,
+    showAddItems,
+    setShowAddItems,
+    contextMenu,
+    setContextMenu,
+  } = useContexts();
 
   const [state, formAction] = useActionState(Insert, {
     message: null,
@@ -30,10 +42,13 @@ const Ubens = ({ fetchAll }) => {
       mouseY: event.clientY - 4,
     });
   };
-  const handleClose = (e) => {
+  const handleClose = (e, selecteditems) => {
     setContextMenu(null);
     setShowAddItems("IN");
     if (e === "ADD") {
+      setTitle(selecteditems.Title);
+      setEN(selecteditems.EN);
+      setFA(selecteditems.FA);
     }
   };
 
@@ -44,11 +59,11 @@ const Ubens = ({ fetchAll }) => {
       setRule("");
       setExample("");
     }
-  });
+  }, [state.success, setDesc, setTip, setRule, setExample]);
 
   return (
     <Box className={classess.Wrapper}>
-      {fetchAll.length === 0 ? (
+      {grouped.length === 0 ? (
         <Box className={classess.WrapperStarter}>
           <GiChestnutLeaf className={classess.Leaf1} />
           <span className={classess.WS1}>Der Erfolg gehört mir.</span>
@@ -59,7 +74,7 @@ const Ubens = ({ fetchAll }) => {
           </span>
         </Box>
       ) : (
-        fetchAll.map((FAM, ID) => (
+        grouped.map((FAM, ID) => (
           <Box
             key={ID}
             className={classess.Ubens}
@@ -72,10 +87,12 @@ const Ubens = ({ fetchAll }) => {
             </Box>
             <Box className={classess.UbensDesc}>{FAM.Desc}</Box>
             <Box className={classess.UbensTip}>{FAM.Tip}</Box>
+            <Box className={classess.UbensRule}>{FAM.Rule}</Box>
             <Menus
               contextMenu={contextMenu}
               setContextMenu={setContextMenu}
               handleClose={handleClose}
+              FAM={FAM}
             />
           </Box>
         ))

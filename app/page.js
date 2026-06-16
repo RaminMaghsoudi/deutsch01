@@ -4,5 +4,25 @@ import Ubens from "@/components/ubens/Ubens";
 
 export default async function Home() {
   const fetchAll = await FetchAll("Laibrary");
-  return <Ubens fetchAll={fetchAll} />;
+  const grouped = Object.values(
+    fetchAll.reduce((acc, item) => {
+      const key = `${item.Title}-${item.EN}-${item.FA}`;
+
+      if (!acc[key]) {
+        acc[key] = {
+          Title: item.Title,
+          EN: item.EN,
+          FA: item.FA,
+          items: [],
+        };
+      }
+
+      acc[key].items.push(item);
+
+      return acc;
+    }, {}),
+  );
+  console.log(grouped);
+
+  return <Ubens grouped={grouped} />;
 }

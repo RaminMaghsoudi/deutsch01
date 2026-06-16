@@ -1,3 +1,4 @@
+import { AppProvider } from "./Context";
 import "./globals.css";
 
 export const metadata = {
@@ -7,8 +8,10 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <AppProvider>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </AppProvider>
   );
 }
