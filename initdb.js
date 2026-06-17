@@ -5,13 +5,12 @@ db.prepare(
   `
    CREATE TABLE IF NOT EXISTS Laibrary (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
+       date TEXT DEFAULT '',
        Title TEXT NOT NULL,
-       EN TEXT NOT NULL,
-       FA TEXT NOT NULL,
-       Desc TEXT NOT NULL,
-       Tip TEXT NOT NULL,
-       Rule TEXT NOT NULL,
-       Example TEXT NOT NULL
+       EN TEXT DEFAULT '',
+       FA TEXT DEFAULT '',
+       Type TEXT DEFAULT '',
+       Target TEXT DEFAULT ''
     )
 `,
 ).run();

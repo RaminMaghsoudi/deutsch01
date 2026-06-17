@@ -7,10 +7,7 @@ export function AppProvider({ children }) {
   const [Title, setTitle] = useState("");
   const [EN, setEN] = useState("");
   const [FA, setFA] = useState("");
-  const [Desc, setDesc] = useState("");
-  const [Tip, setTip] = useState("");
-  const [Rule, setRule] = useState("");
-  const [Example, setExample] = useState("");
+  const [Target, setTarget] = useState("");
   const [showAddItems, setShowAddItems] = useState("");
   const [contextMenu, setContextMenu] = useState(null);
 
@@ -23,14 +20,8 @@ export function AppProvider({ children }) {
         setEN,
         FA,
         setFA,
-        Desc,
-        setDesc,
-        Tip,
-        setTip,
-        Rule,
-        setRule,
-        Example,
-        setExample,
+        Target,
+        setTarget,
         showAddItems,
         setShowAddItems,
         contextMenu,

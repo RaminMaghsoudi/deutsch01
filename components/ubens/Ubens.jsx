@@ -18,14 +18,8 @@ const Ubens = ({ grouped }) => {
     setEN,
     FA,
     setFA,
-    Desc,
-    setDesc,
-    Tip,
-    setTip,
-    Rule,
-    setRule,
-    Example,
-    setExample,
+    Target,
+    setTarget,
     showAddItems,
     setShowAddItems,
     contextMenu,
@@ -54,12 +48,14 @@ const Ubens = ({ grouped }) => {
 
   useEffect(() => {
     if (state.success) {
-      setDesc("");
-      setTip("");
-      setRule("");
-      setExample("");
+      setTitle("");
+      setEN("");
+      setFA("");
+      setTarget("");
+      setShowAddItems("OUT");
     }
-  }, [state.success, setDesc, setTip, setRule, setExample]);
+  }, [state.success, setTarget, setEN, setFA, setTitle, setShowAddItems]);
+  console.log(grouped);
 
   return (
     <Box className={classess.Wrapper}>
@@ -80,14 +76,15 @@ const Ubens = ({ grouped }) => {
             className={classess.Ubens}
             onContextMenu={(e) => handleContextMenu(e)}
           >
-            <Box className={classess.UbensTitle}>
+            
+            {/* <Box className={classess.UbensTitle}>
               <GiChestnutLeaf />
               <span className={classess.UT_Title}>{FAM.Title}</span>
               <span className={classess.UT_EN}>{FAM.EN} :</span>
             </Box>
-            <Box className={classess.UbensDesc}>{FAM.Desc}</Box>
+            <Box className={classess.UbensDesc}>{FAM.items.Target}</Box>
             <Box className={classess.UbensTip}>{FAM.Tip}</Box>
-            <Box className={classess.UbensRule}>{FAM.Rule}</Box>
+            <Box className={classess.UbensRule}>{FAM.Rule}</Box>  */}
             <Menus
               contextMenu={contextMenu}
               setContextMenu={setContextMenu}
@@ -149,13 +146,14 @@ const Ubens = ({ grouped }) => {
             />
             <textarea
               type="text"
-              name="Desc"
-              value={Desc}
-              onChange={(e) => setDesc(e.target.value)}
+              name="Target"
+              value={Target}
+              onChange={(e) => setTarget(e.target.value)}
               className={classess.TitleTextarea}
               placeholder="Beschreibung Hinzufügen"
             />
-            <textarea
+            <input type="hidden" name="Type" value="DESCRIPTION" />
+            {/* <textarea
               type="text"
               name="Tip"
               value={Tip}
@@ -178,7 +176,7 @@ const Ubens = ({ grouped }) => {
               onChange={(e) => setExample(e.target.value)}
               className={`${classess.TitleInput} ${classess.TI}`}
               placeholder="Beispiel hinzufügen"
-            />
+            /> */}
             {state.message && (
               <Box
                 className={state.success ? classess.Success : classess.Error}
