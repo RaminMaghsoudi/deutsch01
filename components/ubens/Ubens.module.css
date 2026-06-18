@@ -203,6 +203,8 @@
 .UbensTitle {
   display: flex;
   flex-direction: row-reverse;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .UT_Title {
   font-family: CL;
@@ -220,6 +222,9 @@
   display: flex;
   flex-direction: row-reverse;
   direction: rtl;
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .UbensTip {
   display: flex;

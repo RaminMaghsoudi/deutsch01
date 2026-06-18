@@ -7,7 +7,7 @@ import { GiChestnutLeaf } from "react-icons/gi";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoMdCheckmark } from "react-icons/io";
 import { Insert } from "@/actions";
-import Menus from "../menus/Menus";
+import M1 from "../menus/M1";
 import { useContexts } from "@/app/Context";
 
 const Ubens = ({ grouped }) => {
@@ -29,21 +29,22 @@ const Ubens = ({ grouped }) => {
   const [state, formAction] = useActionState(Insert, {
     message: null,
   });
-  const handleContextMenu = (event) => {
+  const handleContextMenu = (event, Type) => {
     event.preventDefault();
     setContextMenu({
       mouseX: event.clientX - 2,
       mouseY: event.clientY - 4,
+      Type: Type,
     });
   };
   const handleClose = (e, selecteditems) => {
     setContextMenu(null);
-    setShowAddItems("IN");
-    if (e === "ADD") {
-      setTitle(selecteditems.Title);
-      setEN(selecteditems.EN);
-      setFA(selecteditems.FA);
-    }
+    // setShowAddItems("IN");
+    // if (e === "ADD") {
+    //   setTitle(selecteditems.Title);
+    //   setEN(selecteditems.EN);
+    //   setFA(selecteditems.FA);
+    // }
   };
 
   useEffect(() => {
@@ -71,26 +72,51 @@ const Ubens = ({ grouped }) => {
         </Box>
       ) : (
         grouped.map((FAM, ID) => (
-          <Box
-            key={ID}
-            className={classess.Ubens}
-            onContextMenu={(e) => handleContextMenu(e)}
-          >
-            
-            {/* <Box className={classess.UbensTitle}>
+          <Box key={ID} className={classess.Ubens}>
+            <Box
+              className={classess.UbensTitle}
+              sx={{
+                backgroundColor:
+                  contextMenu !== null
+                    ? contextMenu.Type === "Title"
+                      ? "rgba(238, 255, 0, 0.2)"
+                      : ""
+                    : null,
+                borderRadius:
+                  contextMenu !== null
+                    ? contextMenu.Type === "Title"
+                      ? "3px"
+                      : ""
+                    : null,
+              }}
+              onContextMenu={(e) => handleContextMenu(e, "Title")}
+            >
               <GiChestnutLeaf />
               <span className={classess.UT_Title}>{FAM.Title}</span>
               <span className={classess.UT_EN}>{FAM.EN} :</span>
             </Box>
-            <Box className={classess.UbensDesc}>{FAM.items.Target}</Box>
+            {FAM.items.map((FAMI, Index) => (
+              <Box
+                key={Index}
+                className={
+                  FAMI.Type === "DESCRIPTION" ? classess.UbensDesc : ""
+                }
+                onContextMenu={(e) => handleContextMenu(e, "Descrition")}
+              >
+                {FAMI.Target}
+              </Box>
+            ))}
+            {/*
             <Box className={classess.UbensTip}>{FAM.Tip}</Box>
             <Box className={classess.UbensRule}>{FAM.Rule}</Box>  */}
-            <Menus
-              contextMenu={contextMenu}
-              setContextMenu={setContextMenu}
-              handleClose={handleClose}
-              FAM={FAM}
-            />
+            {contextMenu === null ? null : (
+              <M1
+                contextMenu={contextMenu}
+                setContextMenu={setContextMenu}
+                handleClose={handleClose}
+                FAM={FAM}
+              />
+            )}
           </Box>
         ))
       )}
