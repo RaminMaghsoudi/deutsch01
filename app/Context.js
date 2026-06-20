@@ -8,6 +8,7 @@ export function AppProvider({ children }) {
   const [EN, setEN] = useState("");
   const [FA, setFA] = useState("");
   const [Select, setSelect] = useState("Titel erstellen");
+  const [ShowSelect, setShowSelect] = useState(false);
 
   const ArrayOfMenu = [
     "Titel erstellen",
@@ -28,6 +29,8 @@ export function AppProvider({ children }) {
         Select,
         setSelect,
         ArrayOfMenu,
+        ShowSelect,
+        setShowSelect,
       }}
     >
       {children}

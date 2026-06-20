@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Divider } from "@mui/material";
+import { Box, ClickAwayListener, Divider } from "@mui/material";
 import React from "react";
 import classess from "./Add.module.css";
 import { GiButterfly } from "react-icons/gi";
@@ -23,47 +23,68 @@ const Add = () => {
     Select,
     setSelect,
     ArrayOfMenu,
+    ShowSelect,
+    setShowSelect,
   } = useContexts();
 
   return (
     <Box className={classess.Add}>
       <Box className={classess.Header}>
         <GiButterfly className={classess.GiButterfly} />
-        <span className={classess.AI1}>{Select}</span>
-        <Box className={classess.AI2}>
-          <Box
-            value="Titel"
-            className={`${classess.option} ${classess.option2}`}
-            onClick={() => setSelect(ArrayOfMenu[0])}
-          >
-            <RiFunctionAddLine style={{ marginRight: "5px" }} />
-            {ArrayOfMenu[0]}
-          </Box>
-          <Box
-            value="Desctiption"
-            className={classess.option}
-            onClick={() => setSelect(ArrayOfMenu[1])}
-          >
-            <PiLampPendantLight style={{ marginRight: "5px" }} />
-            {ArrayOfMenu[1]}
-          </Box>
-          <Box
-            value="Rule"
-            className={classess.option}
-            onClick={() => setSelect(ArrayOfMenu[2])}
-          >
-            <FiUmbrella style={{ marginRight: "5px" }} />
-            {ArrayOfMenu[2]}
-          </Box>
-          <Box
-            value="Tip"
-            className={`${classess.option} ${classess.option3}`}
-            onClick={() => setSelect(ArrayOfMenu[3])}
-          >
-            <FiDribbble style={{ marginRight: "5px" }} />
-            {ArrayOfMenu[3]}
-          </Box>
-        </Box>
+        <span className={classess.AI1} onClick={() => setShowSelect(true)}>
+          {Select}
+        </span>
+        {ShowSelect ? (
+          <ClickAwayListener onClickAway={() => setShowSelect(false)}>
+            <Box className={classess.AI2}>
+              <Box
+                value="Titel"
+                className={`${classess.option} ${classess.option2}`}
+                onClick={() => {
+                  setSelect(ArrayOfMenu[0]);
+                  setShowSelect(false);
+                }}
+              >
+                <RiFunctionAddLine style={{ marginRight: "5px" }} />
+                {ArrayOfMenu[0]}
+              </Box>
+              <Box
+                value="Desctiption"
+                className={classess.option}
+                onClick={() => {
+                  setSelect(ArrayOfMenu[1]);
+                  setShowSelect(false);
+                }}
+              >
+                <PiLampPendantLight style={{ marginRight: "5px" }} />
+                {ArrayOfMenu[1]}
+              </Box>
+              <Box
+                value="Rule"
+                className={classess.option}
+                onClick={() => {
+                  setSelect(ArrayOfMenu[2]);
+                  setShowSelect(false);
+                }}
+              >
+                <FiUmbrella style={{ marginRight: "5px" }} />
+                {ArrayOfMenu[2]}
+              </Box>
+              <Box
+                value="Tip"
+                className={`${classess.option} ${classess.option3}`}
+                onClick={() => {
+                  setSelect(ArrayOfMenu[3]);
+                  setShowSelect(false);
+                }}
+              >
+                <FiDribbble style={{ marginRight: "5px" }} />
+                {ArrayOfMenu[3]}
+              </Box>
+            </Box>
+          </ClickAwayListener>
+        ) : null}
+
         {/* <select
           value={Select}
           onChange={(e) => setSelect(e.target.value)}
