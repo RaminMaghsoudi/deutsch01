@@ -7,9 +7,7 @@ export function AppProvider({ children }) {
   const [Title, setTitle] = useState("");
   const [EN, setEN] = useState("");
   const [FA, setFA] = useState("");
-  const [Target, setTarget] = useState("");
-  const [showAddItems, setShowAddItems] = useState("");
-  const [contextMenu, setContextMenu] = useState(null);
+  const [Select, setSelect] = useState("");
 
   return (
     <AC.Provider
@@ -20,12 +18,8 @@ export function AppProvider({ children }) {
         setEN,
         FA,
         setFA,
-        Target,
-        setTarget,
-        showAddItems,
-        setShowAddItems,
-        contextMenu,
-        setContextMenu,
+        Select,
+        setSelect,
       }}
     >
       {children}

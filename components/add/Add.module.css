@@ -1,0 +1,89 @@
+.Add {
+  width: 300px;
+  min-height: 100vh;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  align-items: center;
+}
+.Header {
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.GiButterfly {
+  font-size: 2rem;
+  color: rgb(36, 2, 68);
+}
+.AI1 {
+  font-family: CL;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+  color: rgb(36, 2, 68);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.AI2 {
+  margin-top: 5px;
+  color: rgb(36, 2, 68);
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0 0.2rem rgb(158, 157, 157);
+  z-index: 2000;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  margin-top: 120px;
+  padding: 12px 8px 12px 8px;
+}
+.option {
+  padding: 5px 0px 5px 0px;
+  cursor: pointer;
+  font-family: CL;
+  background-color: white;
+  font-size: 1rem;
+  z-index: 3000;
+}
+.option :hover {
+  background-color: rgb(150, 112, 43);
+}
+.Divider3 {
+  position: relative;
+  width: 100px;
+  min-height: 1px;
+  background-color: beige;
+  top: 3px;
+}
+.Divider4 {
+  position: relative;
+  width: 50px;
+  min-height: 1px;
+  background-color: beige;
+  top: 6px;
+}
+.TitleInput {
+  border: 1px solid rgb(228, 228, 188);
+  width: 210px;
+  padding: 12px 8px 12px 8px;
+  font-family: CL;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}

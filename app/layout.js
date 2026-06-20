@@ -1,5 +1,7 @@
-import { AppProvider } from "./Context";
+import Add from "@/components/add/Add";
 import "./globals.css";
+import Wrapper from "@/components/wrapper/Wrapper";
+import { AppProvider } from "./Context";
 
 export const metadata = {
   title: "Deutsch",
@@ -10,7 +12,11 @@ export default async function RootLayout({ children }) {
   return (
     <AppProvider>
       <html lang="en">
-        <body>{children}</body>
+        <body>
+          <Wrapper />
+          {children}
+          <Add />
+        </body>
       </html>
     </AppProvider>
   );
