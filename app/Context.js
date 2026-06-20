@@ -7,7 +7,14 @@ export function AppProvider({ children }) {
   const [Title, setTitle] = useState("");
   const [EN, setEN] = useState("");
   const [FA, setFA] = useState("");
-  const [Select, setSelect] = useState("");
+  const [Select, setSelect] = useState("Titel erstellen");
+
+  const ArrayOfMenu = [
+    "Titel erstellen",
+    "Beschreibung hinzufügen",
+    "Regel hinzufügen",
+    "Trinkgeld hinzufügen",
+  ];
 
   return (
     <AC.Provider
@@ -20,6 +27,7 @@ export function AppProvider({ children }) {
         setFA,
         Select,
         setSelect,
+        ArrayOfMenu,
       }}
     >
       {children}
