@@ -20,6 +20,7 @@ export default async function RootLayout({ children }) {
           Title: item.Title,
           EN: item.EN,
           FA: item.EN,
+          ID: item.id,
           items: [],
         };
       }

@@ -12,6 +12,8 @@ export function AppProvider({ children }) {
   const [ShowSelect, setShowSelect] = useState(false);
   const [SelectItems, setSelectItems] = useState(null);
 
+  const [contextMenu, setContextMenu] = useState(null);
+
   const ArrayOfMenu = [
     "Titel erstellen",
     "Beschreibung hinzufügen",
@@ -37,6 +39,8 @@ export function AppProvider({ children }) {
         setSelectItems,
         Target,
         setTarget,
+        contextMenu,
+        setContextMenu,
       }}
     >
       {children}

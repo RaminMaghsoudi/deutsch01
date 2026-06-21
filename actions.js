@@ -38,3 +38,6 @@ export async function Insert(preveState, formData) {
   }
   // redirect(`/login`);
 }
+export async function Delete(preveState, formData) {
+  console.log("formData");
+}
