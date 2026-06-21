@@ -33,18 +33,20 @@ const Add = () => {
   } = useContexts();
 
   const [state, formAction] = useActionState(Insert, {
+    success: false,
     message: null,
+    timestamp: null,
   });
 
   useEffect(() => {
-    if (state.success) {
+    if (state.timestamp) {
       setTitle("");
       setEN("");
       setFA("");
       setTarget("");
       setSelectItems(null);
     }
-  }, [state.success, setTarget, setEN, setFA, setTitle, setSelectItems]);
+  }, [state.timestamp, setTarget, setEN, setFA, setTitle, setSelectItems]);
 
   return (
     <Box className={classess.Add}>
@@ -145,6 +147,44 @@ const Add = () => {
               placeholder="Beschreibung Hinzufügen"
             />
             <input type="hidden" name="Type" value="DESCRIPTION" />
+            <input
+              type="hidden"
+              name="Title"
+              value={SelectItems?.Title || ""}
+            />
+            <input type="hidden" name="EN" value={SelectItems?.EN || ""} />
+            <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
+          </>
+        ) : Select === "Regel hinzufügen" ? (
+          <>
+            <textarea
+              type="text"
+              name="Target"
+              value={Target}
+              onChange={(e) => setTarget(e.target.value)}
+              className={classess.TitleTextarea}
+              placeholder="Regel Hinzufügen"
+            />
+            <input type="hidden" name="Type" value="RULE" />
+            <input
+              type="hidden"
+              name="Title"
+              value={SelectItems?.Title || ""}
+            />
+            <input type="hidden" name="EN" value={SelectItems?.EN || ""} />
+            <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
+          </>
+        ) : Select === "Trinkgeld hinzufügen" ? (
+          <>
+            <textarea
+              type="text"
+              name="Target"
+              value={Target}
+              onChange={(e) => setTarget(e.target.value)}
+              className={classess.TitleTextarea}
+              placeholder="Trinkgeld Hinzufügen"
+            />
+            <input type="hidden" name="Type" value="TIP" />
             <input
               type="hidden"
               name="Title"

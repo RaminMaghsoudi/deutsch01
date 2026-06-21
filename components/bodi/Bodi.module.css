@@ -12,7 +12,6 @@
   align-items: flex-end;
   justify-content: center;
   text-align: center;
-  border: 1px dashed rgba(100, 100, 100, 0.2);
   margin-left: 25px;
   border-radius: 8px;
   padding: 10px;
@@ -36,4 +35,49 @@
   color: gray;
   font-size: 0.85rem;
   margin-top: 2px;
+}
+.UbensDescription {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-left: 10px;
+  padding-right: 10px;
+  direction: rtl;
+  text-align: right;
+}
+.UbensRule {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  padding-right: 10px;
+  direction: rtl;
+  text-align: right;
+  border: 1px dashed rgba(100, 100, 100, 0.4);
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 15px;
+  background-color: #f6e6ee;
+  padding: 5px;
+}
+.UbensTip {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  padding-right: 10px;
+  direction: rtl;
+  text-align: right;
+  border: 1px dashed rgba(100, 100, 100, 0.4);
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 15px;
+  background-color: rgb(250, 255, 178, 0.4);
+  padding: 5px;
+}
+.Icons {
+  min-width: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

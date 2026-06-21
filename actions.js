@@ -13,6 +13,7 @@ export async function FetchAll(table) {
 export async function Insert(preveState, formData) {
   if (isInvalidText(formData.get("Title")))
     return { success: false, message: "Ungültig Title !!!" };
+
   if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
     return { success: false, message: "Ungültig Beschreibung !!!" };
   if (formData.get("Type") !== null && isInvalidText(formData.get("EN")))
@@ -32,6 +33,7 @@ export async function Insert(preveState, formData) {
     return {
       success: true,
       message: result.message,
+      timestamp: Date.now(),
     };
   }
   // redirect(`/login`);
