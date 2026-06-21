@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, ClickAwayListener, Divider } from "@mui/material";
-import React from "react";
+import React, { useActionState, useEffect } from "react";
 import classess from "./Add.module.css";
 import { GiButterfly } from "react-icons/gi";
 import { useContexts } from "@/app/Context";
@@ -11,6 +11,7 @@ import { PiLampPendantLight } from "react-icons/pi";
 import { GiFlexibleLamp } from "react-icons/gi";
 import { FiDribbble } from "react-icons/fi";
 import { FiUmbrella } from "react-icons/fi";
+import { Insert } from "@/actions";
 
 const Add = () => {
   const {
@@ -25,7 +26,25 @@ const Add = () => {
     ArrayOfMenu,
     ShowSelect,
     setShowSelect,
+    Target,
+    setTarget,
+    SelectItems,
+    setSelectItems,
   } = useContexts();
+
+  const [state, formAction] = useActionState(Insert, {
+    message: null,
+  });
+
+  useEffect(() => {
+    if (state.success) {
+      setTitle("");
+      setEN("");
+      setFA("");
+      setTarget("");
+      setSelectItems(null);
+    }
+  }, [state.success, setTarget, setEN, setFA, setTitle, setSelectItems]);
 
   return (
     <Box className={classess.Add}>
@@ -84,54 +103,64 @@ const Add = () => {
             </Box>
           </ClickAwayListener>
         ) : null}
-
-        {/* <select
-          value={Select}
-          onChange={(e) => setSelect(e.target.value)}
-          className={classess.AI1}
-        >
-          <Box value="Titel">Titel erstellen</Box>
-          <Box value="Desctiption">Beschreibung hinzufügen</Box>
-          <Box value="Rule">Regel hinzufügen</Box>
-          <Box value="Tip">Trinkgeld hinzufügen</Box>
-        </select> */}
-
-        {/* <select
-          value={Select}
-          className={classess.AI1}
-          onChange={(e) => setSelect(e.target.value)}
-        >
-          <Box value="Titel">Titel erstellen</Box>
-          <Box value="Titel">Titel erstellen</Box>
-        </select> */}
         <Divider className={classess.Divider3} />
         <Divider className={classess.Divider4} />
       </Box>
-      <input
-        type="text"
-        name="Title"
-        value={Title}
-        onChange={(e) => setTitle(e.target.value)}
-        className={classess.TitleInput}
-        placeholder="Titel Hinzufügen"
-      />
-      <input
-        type="text"
-        name="EN"
-        value={EN}
-        onChange={(e) => setEN(e.target.value)}
-        className={classess.TitleInput}
-        placeholder="Bedeutung auf Englisch"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => setFA(e.target.value)}
-        className={classess.TitleInput}
-        placeholder="Bedeutung auf Persisch"
-      />
-      <BTN padding="12px 22px 12px 22px">in der Datenbank speichern</BTN>
+      <form action={formAction} className={classess.Form}>
+        {Select === "Titel erstellen" ? (
+          <>
+            <input
+              type="text"
+              name="Title"
+              value={Title}
+              onChange={(e) => setTitle(e.target.value)}
+              className={classess.TitleInput}
+              placeholder="Titel Hinzufügen"
+            />
+            <input
+              type="text"
+              name="EN"
+              value={EN}
+              onChange={(e) => setEN(e.target.value)}
+              className={classess.TitleInput}
+              placeholder="Bedeutung auf Englisch"
+            />
+            <input
+              type="text"
+              name="FA"
+              value={FA}
+              onChange={(e) => setFA(e.target.value)}
+              className={classess.TitleInput}
+              placeholder="Bedeutung auf Persisch"
+            />
+          </>
+        ) : Select === "Beschreibung hinzufügen" ? (
+          <>
+            <textarea
+              type="text"
+              name="Target"
+              value={Target}
+              onChange={(e) => setTarget(e.target.value)}
+              className={classess.TitleTextarea}
+              placeholder="Beschreibung Hinzufügen"
+            />
+            <input type="hidden" name="Type" value="DESCRIPTION" />
+            <input
+              type="hidden"
+              name="Title"
+              value={SelectItems?.Title || ""}
+            />
+            <input type="hidden" name="EN" value={SelectItems?.EN || ""} />
+            <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
+          </>
+        ) : null}
+        <BTN padding="12px 22px 12px 22px">in der Datenbank speichern</BTN>
+        {state.message && (
+          <Box className={state.success ? classess.Success : classess.Error}>
+            {state.message}
+          </Box>
+        )}
+      </form>
     </Box>
   );
 };

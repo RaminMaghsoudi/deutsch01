@@ -13,8 +13,12 @@ export async function FetchAll(table) {
 export async function Insert(preveState, formData) {
   if (isInvalidText(formData.get("Title")))
     return { success: false, message: "Ungültig Title !!!" };
-  if (isInvalidText(formData.get("Target")))
+  if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
     return { success: false, message: "Ungültig Beschreibung !!!" };
+  if (formData.get("Type") !== null && isInvalidText(formData.get("EN")))
+    return { success: false, message: "Ungültig EN !!!" };
+  if (formData.get("Type") !== null && isInvalidText(formData.get("FA")))
+    return { success: false, message: "Ungültig FA !!!" };
 
   const result = await insert(formData);
   if (!result.success) {
