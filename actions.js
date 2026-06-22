@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchAll, insert } from "./lib/daten";
+import { deletes, fetchAll, insert } from "./lib/daten";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -27,17 +27,28 @@ export async function Insert(preveState, formData) {
       success: false,
       message: result.message,
     };
-  }
-  revalidatePath(`/`);
-  if (result.success) {
+  } else if (result.success) {
+    revalidatePath(`/`);
     return {
       success: true,
       message: result.message,
       timestamp: Date.now(),
     };
   }
-  // redirect(`/login`);
 }
-export async function Delete(preveState, formData) {
-  console.log("formData");
+export async function Delete(title) {
+  const result = await deletes(title);
+  if (!result.success) {
+    return {
+      success: false,
+      message: result.message,
+    };
+  } else if (result.success) {
+    revalidatePath(`/`);
+    return {
+      success: true,
+      message: result.message,
+      timestamp: Date.now(),
+    };
+  }
 }

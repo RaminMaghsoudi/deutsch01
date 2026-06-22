@@ -23,8 +23,10 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { DiNetbeans } from "react-icons/di";
 import { SiRemovedotbg } from "react-icons/si";
 import { Delete } from "@/actions";
+import { useRouter } from "next/navigation";
 
 const Bodi = ({ grouped }) => {
+  const router = useRouter();
   const { SelectItems, setSelectItems, contextMenu, setContextMenu } =
     useContexts();
 
@@ -40,12 +42,15 @@ const Bodi = ({ grouped }) => {
   const handleClose = () => {
     setContextMenu(null);
   };
-
-  const [state, formAction] = useActionState(Delete, {
-    success: false,
-    message: null,
-    timestamp: null,
-  });
+  const handleDelete = async (title) => {
+    try {
+      const result = await Delete(title);
+      if (result.success) router.refresh();
+    } catch (err) {
+      console.log(err);
+    }
+    handleClose();
+  };
 
   return (
     <Box className={classess.Bodi}>
@@ -167,20 +172,20 @@ const Bodi = ({ grouped }) => {
                 : "none",
           }}
         />
-        <form action={formAction}>
-          <MenuItem
-            sx={{
-              fontFamily: "CL",
-              display:
-                contextMenu !== null && contextMenu.status === "T"
-                  ? "flex"
-                  : "none",
-            }}
-          >
-            <AiOutlineDelete />
-            <span className={classess.Icon}>Titel Löschen</span>
-          </MenuItem>
-        </form>
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "T"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleDelete(contextMenu.content.Title)}
+        >
+          <AiOutlineDelete />
+          <span className={classess.Icon}>Titel Löschen</span>
+        </MenuItem>
+
         {/* HHHHHHHHHHHHHHHHHHHHHHHHH Regel */}
         <MenuItem
           sx={{
