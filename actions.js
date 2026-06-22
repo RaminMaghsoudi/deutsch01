@@ -1,6 +1,6 @@
 "use server";
 
-import { deletes, fetchAll, insert, update } from "./lib/daten";
+import { deletes, fetchAll, insert, update, updatetarget } from "./lib/daten";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -66,6 +66,27 @@ export async function Update(preveState, formData) {
     return { success: false, message: "Ungültig OldTitle !!!" };
 
   const result = await update(formData);
+  if (!result.success) {
+    return {
+      success: false,
+      message: result.message,
+    };
+  } else if (result.success) {
+    revalidatePath(`/`);
+    return {
+      success: true,
+      message: result.message,
+      timestamp: Date.now(),
+    };
+  }
+}
+export async function UpdateTarget(preveState, formData) {
+  if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
+    return { success: false, message: "Ungültig Beschreibung !!!" };
+  if (formData.get("Type") !== null && isInvalidText(formData.get("OldTitle")))
+    return { success: false, message: "Ungültig OldTitle !!!" };
+
+  const result = await updatetarget(formData);
   if (!result.success) {
     return {
       success: false,

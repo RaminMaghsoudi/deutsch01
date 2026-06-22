@@ -11,7 +11,7 @@ import { PiLampPendantLight } from "react-icons/pi";
 import { GiFlexibleLamp } from "react-icons/gi";
 import { FiDribbble } from "react-icons/fi";
 import { FiUmbrella } from "react-icons/fi";
-import { Insert, Update } from "@/actions";
+import { Insert, Update, UpdateTarget } from "@/actions";
 
 const Add = () => {
   const {
@@ -34,11 +34,20 @@ const Add = () => {
     setEditable,
   } = useContexts();
 
-  const [state, formAction] = useActionState(Editable ? Update : Insert, {
-    success: false,
-    message: null,
-    timestamp: null,
-  });
+  const [state, formAction] = useActionState(
+    Editable === null
+      ? Insert
+      : Editable.status === "T"
+        ? Update
+        : Editable.status === "D"
+          ? UpdateTarget
+          : Insert,
+    {
+      success: false,
+      message: null,
+      timestamp: null,
+    },
+  );
 
   useEffect(() => {
     if (state.timestamp) {
@@ -57,6 +66,7 @@ const Add = () => {
     setTitle,
     setSelectItems,
     setEditable,
+    Editable,
   ]);
 
   return (

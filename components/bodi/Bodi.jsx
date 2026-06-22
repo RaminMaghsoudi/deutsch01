@@ -35,6 +35,7 @@ const Bodi = ({ grouped }) => {
     setTitle,
     setEN,
     setFA,
+    setTarget,
     setSelect,
     setEditable,
   } = useContexts();
@@ -61,13 +62,17 @@ const Bodi = ({ grouped }) => {
     handleClose();
   };
   const handleEdit = async (content) => {
-    console.log(content);
     if (contextMenu.status === "T") {
-      setEditable(content.Title);
+      setEditable({ status: contextMenu.status, content: content.Title });
       setTitle(content.Title);
       setEN(content.EN);
       setFA(content.FA);
       setSelect("Titel erstellen");
+    }
+    if (contextMenu.status === "D") {
+      setEditable({ status: contextMenu.status, content: content.Target });
+      setTarget(content.Target);
+      setSelect("Beschreibung hinzufügen");
     }
     handleClose();
   };
@@ -119,7 +124,7 @@ const Bodi = ({ grouped }) => {
               onContextMenu={(e) =>
                 handleContextMenu(
                   e,
-                  GM,
+                  GMI,
                   GMI.Type === "RULE" ? "R" : GMI.Type === "TIP" ? "P" : "D",
                 )
               }
@@ -215,6 +220,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleEdit(contextMenu.content)}
         >
           <DiNetbeans style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Regel bearbeiten</span>
@@ -252,6 +258,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleEdit(contextMenu.content)}
         >
           <DiNetbeans style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Trinkgeld Bearbeiten</span>
@@ -289,6 +296,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleEdit(contextMenu.content)}
         >
           <DiNetbeans style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Beschreibung Bearbeiten</span>
