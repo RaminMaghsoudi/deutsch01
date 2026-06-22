@@ -27,8 +27,17 @@ import { useRouter } from "next/navigation";
 
 const Bodi = ({ grouped }) => {
   const router = useRouter();
-  const { SelectItems, setSelectItems, contextMenu, setContextMenu } =
-    useContexts();
+  const {
+    SelectItems,
+    setSelectItems,
+    contextMenu,
+    setContextMenu,
+    setTitle,
+    setEN,
+    setFA,
+    setSelect,
+    setEditable,
+  } = useContexts();
 
   const handleContextMenu = (event, GM, status) => {
     event.preventDefault();
@@ -48,6 +57,17 @@ const Bodi = ({ grouped }) => {
       if (result.success) router.refresh();
     } catch (err) {
       console.log(err);
+    }
+    handleClose();
+  };
+  const handleEdit = async (content) => {
+    console.log(content);
+    if (contextMenu.status === "T") {
+      setEditable(content.Title);
+      setTitle(content.Title);
+      setEN(content.EN);
+      setFA(content.FA);
+      setSelect("Titel erstellen");
     }
     handleClose();
   };
@@ -160,6 +180,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleEdit(contextMenu.content)}
         >
           <SiReaddotcv />
           <span className={classess.Icon}>Titel bearbeiten</span>
@@ -185,7 +206,6 @@ const Bodi = ({ grouped }) => {
           <AiOutlineDelete />
           <span className={classess.Icon}>Titel Löschen</span>
         </MenuItem>
-
         {/* HHHHHHHHHHHHHHHHHHHHHHHHH Regel */}
         <MenuItem
           sx={{

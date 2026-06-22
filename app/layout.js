@@ -19,7 +19,7 @@ export default async function RootLayout({ children }) {
         acc[key] = {
           Title: item.Title,
           EN: item.EN,
-          FA: item.EN,
+          FA: item.FA,
           ID: item.id,
           items: [],
         };

@@ -11,7 +11,7 @@ import { PiLampPendantLight } from "react-icons/pi";
 import { GiFlexibleLamp } from "react-icons/gi";
 import { FiDribbble } from "react-icons/fi";
 import { FiUmbrella } from "react-icons/fi";
-import { Insert } from "@/actions";
+import { Insert, Update } from "@/actions";
 
 const Add = () => {
   const {
@@ -30,9 +30,11 @@ const Add = () => {
     setTarget,
     SelectItems,
     setSelectItems,
+    Editable,
+    setEditable,
   } = useContexts();
 
-  const [state, formAction] = useActionState(Insert, {
+  const [state, formAction] = useActionState(Editable ? Update : Insert, {
     success: false,
     message: null,
     timestamp: null,
@@ -45,8 +47,17 @@ const Add = () => {
       setFA("");
       setTarget("");
       setSelectItems(null);
+      setEditable(null);
     }
-  }, [state.timestamp, setTarget, setEN, setFA, setTitle, setSelectItems]);
+  }, [
+    state.timestamp,
+    setTarget,
+    setEN,
+    setFA,
+    setTitle,
+    setSelectItems,
+    setEditable,
+  ]);
 
   return (
     <Box className={classess.Add}>
@@ -135,6 +146,9 @@ const Add = () => {
               className={classess.TitleInput}
               placeholder="Bedeutung auf Persisch"
             />
+            {Editable !== null ? (
+              <input type="hidden" name="OldTitle" value={Editable} />
+            ) : null}
           </>
         ) : Select === "Beschreibung hinzufügen" ? (
           <>

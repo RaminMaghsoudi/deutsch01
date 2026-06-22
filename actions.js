@@ -1,6 +1,6 @@
 "use server";
 
-import { deletes, fetchAll, insert } from "./lib/daten";
+import { deletes, fetchAll, insert, update } from "./lib/daten";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -16,10 +16,10 @@ export async function Insert(preveState, formData) {
 
   if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
     return { success: false, message: "Ungültig Beschreibung !!!" };
-  if (formData.get("Type") !== null && isInvalidText(formData.get("EN")))
-    return { success: false, message: "Ungültig EN !!!" };
-  if (formData.get("Type") !== null && isInvalidText(formData.get("FA")))
-    return { success: false, message: "Ungültig FA !!!" };
+  // if (formData.get("Type") !== null && isInvalidText(formData.get("EN")))
+  //   return { success: false, message: "Ungültig EN !!!" };
+  // if (formData.get("Type") !== null && isInvalidText(formData.get("FA")))
+  //   return { success: false, message: "Ungültig FA !!!" };
 
   const result = await insert(formData);
   if (!result.success) {
@@ -38,6 +38,34 @@ export async function Insert(preveState, formData) {
 }
 export async function Delete(title) {
   const result = await deletes(title);
+  if (!result.success) {
+    return {
+      success: false,
+      message: result.message,
+    };
+  } else if (result.success) {
+    revalidatePath(`/`);
+    return {
+      success: true,
+      message: result.message,
+      timestamp: Date.now(),
+    };
+  }
+}
+export async function Update(preveState, formData) {
+  if (isInvalidText(formData.get("Title")))
+    return { success: false, message: "Ungültig Title !!!" };
+
+  if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
+    return { success: false, message: "Ungültig Beschreibung !!!" };
+  // if (formData.get("Type") !== null && isInvalidText(formData.get("EN")))
+  //   return { success: false, message: "Ungültig EN !!!" };
+  // if (formData.get("Type") !== null && isInvalidText(formData.get("FA")))
+  //   return { success: false, message: "Ungültig FA !!!" };
+  if (formData.get("Type") !== null && isInvalidText(formData.get("OldTitle")))
+    return { success: false, message: "Ungültig OldTitle !!!" };
+
+  const result = await update(formData);
   if (!result.success) {
     return {
       success: false,
