@@ -1,6 +1,13 @@
 "use server";
 
-import { deletes, fetchAll, insert, update, updatetarget } from "./lib/daten";
+import {
+  deletes,
+  deletestarget,
+  fetchAll,
+  insert,
+  update,
+  updatetarget,
+} from "./lib/daten";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -52,6 +59,22 @@ export async function Delete(title) {
     };
   }
 }
+export async function DeleteTarget(id) {
+  const result = await deletestarget(id);
+  if (!result.success) {
+    return {
+      success: false,
+      message: result.message,
+    };
+  } else if (result.success) {
+    revalidatePath(`/`);
+    return {
+      success: true,
+      message: result.message,
+      timestamp: Date.now(),
+    };
+  }
+}
 export async function Update(preveState, formData) {
   if (isInvalidText(formData.get("Title")))
     return { success: false, message: "Ungültig Title !!!" };
@@ -83,8 +106,8 @@ export async function Update(preveState, formData) {
 export async function UpdateTarget(preveState, formData) {
   if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
     return { success: false, message: "Ungültig Beschreibung !!!" };
-  if (formData.get("Type") !== null && isInvalidText(formData.get("OldTitle")))
-    return { success: false, message: "Ungültig OldTitle !!!" };
+  if (formData.get("Type") !== null && isInvalidText(formData.get("id")))
+    return { success: false, message: "Ungültig ID !!!" };
 
   const result = await updatetarget(formData);
   if (!result.success) {

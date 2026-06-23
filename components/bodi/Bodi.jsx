@@ -22,7 +22,7 @@ import { RiFunctionAddLine } from "react-icons/ri";
 import { AiOutlineDelete } from "react-icons/ai";
 import { DiNetbeans } from "react-icons/di";
 import { SiRemovedotbg } from "react-icons/si";
-import { Delete } from "@/actions";
+import { Delete, DeleteTarget } from "@/actions";
 import { useRouter } from "next/navigation";
 
 const Bodi = ({ grouped }) => {
@@ -38,6 +38,7 @@ const Bodi = ({ grouped }) => {
     setTarget,
     setSelect,
     setEditable,
+    setShowMessage,
   } = useContexts();
 
   const handleContextMenu = (event, GM, status) => {
@@ -48,6 +49,7 @@ const Bodi = ({ grouped }) => {
       content: GM,
       status: status,
     });
+    setShowMessage(false);
   };
   const handleClose = () => {
     setContextMenu(null);
@@ -69,10 +71,31 @@ const Bodi = ({ grouped }) => {
       setFA(content.FA);
       setSelect("Titel erstellen");
     }
-    if (contextMenu.status === "D") {
-      setEditable({ status: contextMenu.status, content: content.Target });
+    if (
+      contextMenu.status === "D" ||
+      contextMenu.status === "R" ||
+      contextMenu.status === "P"
+    ) {
+      setEditable({ status: contextMenu.status, id: content.id });
       setTarget(content.Target);
-      setSelect("Beschreibung hinzufügen");
+      setSelect(
+        contextMenu.status === "D"
+          ? "Beschreibung hinzufügen"
+          : contextMenu.status === "R"
+            ? "Regel hinzufügen"
+            : contextMenu.status === "P"
+              ? "Trinkgeld hinzufügen"
+              : null,
+      );
+    }
+    handleClose();
+  };
+  const handleDeleteTarget = async (id) => {
+    try {
+      const result = await DeleteTarget(id);
+      if (result.success) router.refresh();
+    } catch (err) {
+      console.log(err);
     }
     handleClose();
   };
@@ -233,6 +256,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleDeleteTarget(contextMenu.content.id)}
         >
           <AiOutlineDelete style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Löschen Regel</span>
@@ -271,6 +295,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleDeleteTarget(contextMenu.content.id)}
         >
           <AiOutlineDelete style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Löschen Trinkgeld</span>
@@ -309,6 +334,7 @@ const Bodi = ({ grouped }) => {
                 ? "flex"
                 : "none",
           }}
+          onClick={() => handleDeleteTarget(contextMenu.content.id)}
         >
           <AiOutlineDelete style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Löschen Beschreibung</span>

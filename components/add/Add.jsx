@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, ClickAwayListener, Divider } from "@mui/material";
-import React, { useActionState, useEffect } from "react";
+import React, { useActionState, useEffect, useRef, useState } from "react";
 import classess from "./Add.module.css";
 import { GiButterfly } from "react-icons/gi";
 import { useContexts } from "@/app/Context";
@@ -14,6 +14,7 @@ import { FiUmbrella } from "react-icons/fi";
 import { Insert, Update, UpdateTarget } from "@/actions";
 
 const Add = () => {
+  const prevTimestamp = useRef(null);
   const {
     Title,
     setTitle,
@@ -32,6 +33,8 @@ const Add = () => {
     setSelectItems,
     Editable,
     setEditable,
+    showMessage,
+    setShowMessage,
   } = useContexts();
 
   const [state, formAction] = useActionState(
@@ -39,7 +42,9 @@ const Add = () => {
       ? Insert
       : Editable.status === "T"
         ? Update
-        : Editable.status === "D"
+        : Editable.status === "D" ||
+            Editable.status === "R" ||
+            Editable.status === "P"
           ? UpdateTarget
           : Insert,
     {
@@ -50,13 +55,15 @@ const Add = () => {
   );
 
   useEffect(() => {
-    if (state.timestamp) {
+    if (state.timestamp && state.timestamp !== prevTimestamp.current) {
+      prevTimestamp.current = state.timestamp;
       setTitle("");
       setEN("");
       setFA("");
       setTarget("");
       setSelectItems(null);
       setEditable(null);
+      setShowMessage(true);
     }
   }, [
     state.timestamp,
@@ -67,7 +74,18 @@ const Add = () => {
     setSelectItems,
     setEditable,
     Editable,
+    setShowMessage,
   ]);
+  const RemoveEditable = () => {
+    setEditable(null);
+    setTitle("");
+    setEN("");
+    setFA("");
+    setTarget("");
+    setSelectItems(null);
+    setEditable(null);
+    setShowMessage(true);
+  };
 
   return (
     <Box className={classess.Add}>
@@ -156,9 +174,6 @@ const Add = () => {
               className={classess.TitleInput}
               placeholder="Bedeutung auf Persisch"
             />
-            {Editable !== null ? (
-              <input type="hidden" name="OldTitle" value={Editable} />
-            ) : null}
           </>
         ) : Select === "Beschreibung hinzufügen" ? (
           <>
@@ -218,13 +233,34 @@ const Add = () => {
             <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
           </>
         ) : null}
-        <BTN padding="12px 22px 12px 22px">in der Datenbank speichern</BTN>
-        {state.message && (
+        <BTN padding="12px 22px 12px 22px" color="rgb(36, 2, 68)">
+          in der Datenbank speichern
+        </BTN>
+
+        {showMessage && state.message && (
           <Box className={state.success ? classess.Success : classess.Error}>
             {state.message}
           </Box>
         )}
+        {Editable !== null && Editable.status === "T" ? (
+          <input type="hidden" name="OldTitle" value={Editable.content} />
+        ) : null}
+        {Editable !== null &&
+        (Editable.status === "D" ||
+          Editable.status === "R" ||
+          Editable.status === "P") ? (
+          <input type="hidden" name="id" value={Editable.id} />
+        ) : null}
       </form>
+      {Editable == null ? null : (
+        <BTN
+          OnClick={RemoveEditable}
+          padding="12px 40px 12px 40px"
+          color="rgb(134, 5, 5)"
+        >
+          bearbeiten abbrechen
+        </BTN>
+      )}
     </Box>
   );
 };
