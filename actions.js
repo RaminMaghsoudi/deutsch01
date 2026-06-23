@@ -22,11 +22,19 @@ export async function Insert(preveState, formData) {
     return { success: false, message: "Ungültig Title !!!" };
 
   if (formData.get("Type") !== null && isInvalidText(formData.get("Target")))
-    return { success: false, message: "Ungültig Beschreibung !!!" };
-  // if (formData.get("Type") !== null && isInvalidText(formData.get("EN")))
-  //   return { success: false, message: "Ungültig EN !!!" };
-  // if (formData.get("Type") !== null && isInvalidText(formData.get("FA")))
-  //   return { success: false, message: "Ungültig FA !!!" };
+    return {
+      success: false,
+      message:
+        formData.get("Type") === "DESCRIPTION"
+          ? "Ungültig Beschreibung !!!"
+          : formData.get("Type") === "RULE"
+            ? "Ungültig Regle !!!"
+            : formData.get("Type") === "TIP"
+              ? "Ungültig Trinkgeld !!!"
+              : formData.get("Type") === "TABLE"
+                ? "Ungültig TD !!!"
+                : "",
+    };
 
   const result = await insert(formData);
   if (!result.success) {

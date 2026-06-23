@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Divider, Menu, MenuItem } from "@mui/material";
-import React, { useActionState } from "react";
+import React, { Fragment, useActionState } from "react";
 import classess from "./Bodi.module.css";
 import { GiChestnutLeaf } from "react-icons/gi";
 import { PiButterflyLight } from "react-icons/pi";
@@ -99,7 +99,7 @@ const Bodi = ({ grouped }) => {
     }
     handleClose();
   };
-
+  console.log(grouped);
   return (
     <Box className={classess.Bodi}>
       {grouped.map((GM, ID) => (
@@ -132,38 +132,48 @@ const Bodi = ({ grouped }) => {
             <span className={classess.UT_Title}>{GM.Title}</span>
             <span className={classess.UT_EN}>{GM.EN} :</span>
           </Box>
-          {GM.items.map((GMI, Index) => (
-            <Box
-              key={Index}
-              className={
-                GMI.Type === "DESCRIPTION"
-                  ? classess.UbensDescription
-                  : GMI.Type === "RULE"
-                    ? classess.UbensRule
-                    : GMI.Type === "TIP"
-                      ? classess.UbensTip
-                      : ""
-              }
-              onContextMenu={(e) =>
-                handleContextMenu(
-                  e,
-                  GMI,
-                  GMI.Type === "RULE" ? "R" : GMI.Type === "TIP" ? "P" : "D",
-                )
-              }
-            >
-              {GMI.Type === "RULE" ? (
-                <Box className={classess.Icons}>
-                  <BsCheck2All />
-                </Box>
-              ) : GMI.Type === "TIP" ? (
-                <Box className={classess.Icons}>
-                  <PiSealCheckThin />
-                </Box>
-              ) : null}
-              {GMI.Target}
-            </Box>
-          ))}
+          {GM.items.map((GMI, Index) =>
+            GMI.Type === "TABLE" ? (
+              <Box key={Index} className={classess.Table}>
+                {GM.tables.map((GMT, index) => (
+                  <Box key={index} className={classess.TD}>
+                    {GMT.Target}
+                  </Box>
+                ))}
+              </Box>
+            ) : (
+              <Box
+                key={Index}
+                className={
+                  GMI.Type === "DESCRIPTION"
+                    ? classess.UbensDescription
+                    : GMI.Type === "RULE"
+                      ? classess.UbensRule
+                      : GMI.Type === "TIP"
+                        ? classess.UbensTip
+                        : ""
+                }
+                onContextMenu={(e) =>
+                  handleContextMenu(
+                    e,
+                    GMI,
+                    GMI.Type === "RULE" ? "R" : GMI.Type === "TIP" ? "P" : "D",
+                  )
+                }
+              >
+                {GMI.Type === "RULE" ? (
+                  <Box className={classess.Icons}>
+                    <BsCheck2All />
+                  </Box>
+                ) : GMI.Type === "TIP" ? (
+                  <Box className={classess.Icons}>
+                    <PiSealCheckThin />
+                  </Box>
+                ) : null}
+                {GMI.Target}
+              </Box>
+            ),
+          )}
         </Box>
       ))}
       <Menu

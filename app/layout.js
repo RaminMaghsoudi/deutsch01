@@ -12,6 +12,23 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const fetchAll = await FetchAll("Laibrary");
+  // const grouped = Object.values(
+  //   (fetchAll || []).reduce((acc, item) => {
+  //     const key = item.Title?.trim().toLowerCase() || "";
+  //     if (!acc[key]) {
+  //       acc[key] = {
+  //         Title: item.Title,
+  //         EN: item.EN,
+  //         FA: item.FA,
+  //         ID: item.id,
+  //         items: [],
+  //       };
+  //     }
+  //     acc[key].items.push(item);
+  //     return acc;
+  //   }, {}),
+  // );
+  // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
   const grouped = Object.values(
     (fetchAll || []).reduce((acc, item) => {
       const key = item.Title?.trim().toLowerCase() || "";
@@ -22,12 +39,41 @@ export default async function RootLayout({ children }) {
           FA: item.FA,
           ID: item.id,
           items: [],
+          tables: [],
         };
       }
       acc[key].items.push(item);
+      if (item.Type === "TABLE") {
+        acc[key].tables.push(item);
+      }
       return acc;
     }, {}),
   );
+  // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+  // const grouped = Object.values(
+  //   (fetchAll || []).reduce((acc, item) => {
+  //     const key = item.Title?.trim().toLowerCase() || "";
+
+  //     if (!acc[key]) {
+  //       acc[key] = {
+  //         Title: item.Title,
+  //         EN: item.EN,
+  //         FA: item.FA,
+  //         ID: item.id,
+  //         items: [],
+  //         tables: [],
+  //       };
+  //     }
+
+  //     if (item.Type === "TABLE") {
+  //       acc[key].tables.push(item);
+  //     } else {
+  //       acc[key].items.push(item);
+  //     }
+
+  //     return acc;
+  //   }, {}),
+  // );
 
   return (
     <AppProvider>

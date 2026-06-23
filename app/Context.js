@@ -8,19 +8,21 @@ export function AppProvider({ children }) {
   const [EN, setEN] = useState("");
   const [FA, setFA] = useState("");
   const [Target, setTarget] = useState("");
+
   const [Select, setSelect] = useState("Titel erstellen");
   const [ShowSelect, setShowSelect] = useState(false);
   const [SelectItems, setSelectItems] = useState(null);
 
   const [contextMenu, setContextMenu] = useState(null);
   const [Editable, setEditable] = useState(null);
-   const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const ArrayOfMenu = [
     "Titel erstellen",
     "Beschreibung hinzufügen",
     "Regel hinzufügen",
     "Trinkgeld hinzufügen",
+    "Tabelle hinzufügen",
   ];
 
   return (

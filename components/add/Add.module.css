@@ -34,7 +34,7 @@
   flex-direction: column;
 }
 .AI2 {
-  width: 200px;
+  width: 220px;
   min-height: auto;
   display: flex;
   flex-direction: column;
@@ -47,11 +47,11 @@
   background-color: white;
   text-align-last: left;
   z-index: 3000;
-  margin-top: 240px;
+  margin-top: 270px;
 }
 .option {
-  width: 180px;
-  min-height: 35px;
+  width: 200px;
+  min-height: 45px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -61,7 +61,7 @@
   padding-right: 10px;
   transition: 0.5s;
   font-family: CL;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .option2 {
   border-radius: 5px 5px 0 0;

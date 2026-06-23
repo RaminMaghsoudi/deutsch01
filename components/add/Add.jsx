@@ -12,6 +12,15 @@ import { GiFlexibleLamp } from "react-icons/gi";
 import { FiDribbble } from "react-icons/fi";
 import { FiUmbrella } from "react-icons/fi";
 import { Insert, Update, UpdateTarget } from "@/actions";
+import { PiUmbrellaLight } from "react-icons/pi";
+import { PiHexagonLight } from "react-icons/pi";
+import { WiDirectionUpRight } from "react-icons/wi";
+import { GoArrowUpRight } from "react-icons/go";
+import { CiSaveUp2 } from "react-icons/ci";
+import { CgController } from "react-icons/cg";
+import { LuQrCode } from "react-icons/lu";
+import { IoLayersOutline } from "react-icons/io5";
+import { RxLayers } from "react-icons/rx";
 
 const Add = () => {
   const prevTimestamp = useRef(null);
@@ -65,7 +74,9 @@ const Add = () => {
       setEditable(null);
       setShowMessage(true);
     }
+    if (!state.status) setShowMessage(true);
   }, [
+    state,
     state.timestamp,
     setTarget,
     setEN,
@@ -105,7 +116,9 @@ const Add = () => {
                   setShowSelect(false);
                 }}
               >
-                <RiFunctionAddLine style={{ marginRight: "5px" }} />
+                <CgController
+                  style={{ marginRight: "10px", fontSize: "18px" }}
+                />
                 {ArrayOfMenu[0]}
               </Box>
               <Box
@@ -116,7 +129,9 @@ const Add = () => {
                   setShowSelect(false);
                 }}
               >
-                <PiLampPendantLight style={{ marginRight: "5px" }} />
+                <PiLampPendantLight
+                  style={{ marginRight: "10px", fontSize: "18px" }}
+                />
                 {ArrayOfMenu[1]}
               </Box>
               <Box
@@ -127,19 +142,34 @@ const Add = () => {
                   setShowSelect(false);
                 }}
               >
-                <FiUmbrella style={{ marginRight: "5px" }} />
+                <PiUmbrellaLight
+                  style={{ marginRight: "10px", fontSize: "18px" }}
+                />
                 {ArrayOfMenu[2]}
               </Box>
               <Box
                 value="Tip"
-                className={`${classess.option} ${classess.option3}`}
+                className={`${classess.option}`}
                 onClick={() => {
                   setSelect(ArrayOfMenu[3]);
                   setShowSelect(false);
                 }}
               >
-                <FiDribbble style={{ marginRight: "5px" }} />
+                <GoArrowUpRight
+                  style={{ marginRight: "10px", fontSize: "18px" }}
+                />
                 {ArrayOfMenu[3]}
+              </Box>
+              <Box
+                value="Tip"
+                className={`${classess.option} ${classess.option3}`}
+                onClick={() => {
+                  setSelect(ArrayOfMenu[4]);
+                  setShowSelect(false);
+                }}
+              >
+                <RxLayers style={{ marginRight: "10px", fontSize: "18px" }} />
+                {ArrayOfMenu[4]}
               </Box>
             </Box>
           </ClickAwayListener>
@@ -154,7 +184,10 @@ const Add = () => {
               type="text"
               name="Title"
               value={Title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setShowMessage(false);
+              }}
               className={classess.TitleInput}
               placeholder="Titel Hinzufügen"
             />
@@ -162,7 +195,10 @@ const Add = () => {
               type="text"
               name="EN"
               value={EN}
-              onChange={(e) => setEN(e.target.value)}
+              onChange={(e) => {
+                setEN(e.target.value);
+                setShowMessage(false);
+              }}
               className={classess.TitleInput}
               placeholder="Bedeutung auf Englisch"
             />
@@ -170,7 +206,10 @@ const Add = () => {
               type="text"
               name="FA"
               value={FA}
-              onChange={(e) => setFA(e.target.value)}
+              onChange={(e) => {
+                setFA(e.target.value);
+                setShowMessage(false);
+              }}
               className={classess.TitleInput}
               placeholder="Bedeutung auf Persisch"
             />
@@ -181,7 +220,10 @@ const Add = () => {
               type="text"
               name="Target"
               value={Target}
-              onChange={(e) => setTarget(e.target.value)}
+              onChange={(e) => {
+                setTarget(e.target.value);
+                setShowMessage(false);
+              }}
               className={classess.TitleTextarea}
               placeholder="Beschreibung Hinzufügen"
             />
@@ -200,7 +242,10 @@ const Add = () => {
               type="text"
               name="Target"
               value={Target}
-              onChange={(e) => setTarget(e.target.value)}
+              onChange={(e) => {
+                setTarget(e.target.value);
+                setShowMessage(false);
+              }}
               className={classess.TitleTextarea}
               placeholder="Regel Hinzufügen"
             />
@@ -219,7 +264,10 @@ const Add = () => {
               type="text"
               name="Target"
               value={Target}
-              onChange={(e) => setTarget(e.target.value)}
+              onChange={(e) => {
+                setTarget(e.target.value);
+                setShowMessage(false);
+              }}
               className={classess.TitleTextarea}
               placeholder="Trinkgeld Hinzufügen"
             />
@@ -232,11 +280,32 @@ const Add = () => {
             <input type="hidden" name="EN" value={SelectItems?.EN || ""} />
             <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
           </>
+        ) : Select === "Tabelle hinzufügen" ? (
+          <>
+            <input
+              type="text"
+              name="Target"
+              value={Target}
+              onChange={(e) => {
+                setTarget(e.target.value);
+                setShowMessage(false);
+              }}
+              className={classess.TitleInput}
+              placeholder="TD"
+            />
+            <input type="hidden" name="Type" value="TABLE" />
+            <input
+              type="hidden"
+              name="Title"
+              value={SelectItems?.Title || ""}
+            />
+            <input type="hidden" name="EN" value={SelectItems?.EN || ""} />
+            <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
+          </>
         ) : null}
         <BTN padding="12px 22px 12px 22px" color="rgb(36, 2, 68)">
           in der Datenbank speichern
         </BTN>
-
         {showMessage && state.message && (
           <Box className={state.success ? classess.Success : classess.Error}>
             {state.message}
