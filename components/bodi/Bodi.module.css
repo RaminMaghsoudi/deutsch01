@@ -84,7 +84,16 @@
 .Icon {
   margin-left: 7px;
 }
-.Table {
+.UbensTable {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  direction: rtl;
+  text-align: right;
+  border: 1px dashed rgba(100, 100, 100, 0.4);
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 15px;
+  background-color: rgba(228, 228, 225, 0.4);
+  padding: 5px 20px 5px 20px;
 }

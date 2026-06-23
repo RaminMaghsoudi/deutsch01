@@ -24,8 +24,10 @@ import { DiNetbeans } from "react-icons/di";
 import { SiRemovedotbg } from "react-icons/si";
 import { Delete, DeleteTarget } from "@/actions";
 import { useRouter } from "next/navigation";
+import { SiAnydesk } from "react-icons/si";
+import { SiAntdesign } from "react-icons/si";
 
-const Bodi = ({ grouped }) => {
+const Bodi = ({ grouped, groupedTD }) => {
   const router = useRouter();
   const {
     SelectItems,
@@ -39,6 +41,7 @@ const Bodi = ({ grouped }) => {
     setSelect,
     setEditable,
     setShowMessage,
+    setInsertTD,
   } = useContexts();
 
   const handleContextMenu = (event, GM, status) => {
@@ -99,7 +102,16 @@ const Bodi = ({ grouped }) => {
     }
     handleClose();
   };
+  const handleTD = (content) => {
+    //setEditable({ status: contextMenu.status, id: content.id });
+    setInsertTD(content);
+    setSelect("TD-Tabelle hinzufügen");
+    handleClose();
+  };
+
+  console.log(groupedTD);
   console.log(grouped);
+
   return (
     <Box className={classess.Bodi}>
       {grouped.map((GM, ID) => (
@@ -132,7 +144,49 @@ const Bodi = ({ grouped }) => {
             <span className={classess.UT_Title}>{GM.Title}</span>
             <span className={classess.UT_EN}>{GM.EN} :</span>
           </Box>
-          {GM.items.map((GMI, Index) =>
+          {GM.items.map((GMI, Index) => (
+            <Box
+              key={Index}
+              className={
+                GMI.Type === "DESCRIPTION"
+                  ? classess.UbensDescription
+                  : GMI.Type === "RULE"
+                    ? classess.UbensRule
+                    : GMI.Type === "TIP"
+                      ? classess.UbensTip
+                      : GMI.Type === "TABLE"
+                        ? classess.UbensTable
+                        : ""
+              }
+              onContextMenu={(e) =>
+                handleContextMenu(
+                  e,
+                  GMI,
+                  GMI.Type === "RULE"
+                    ? "R"
+                    : GMI.Type === "TIP"
+                      ? "P"
+                      : GMI.Type === "DESCRIPTION"
+                        ? "D"
+                        : "B",
+                )
+              }
+            >
+              {GMI.Type === "RULE" ? (
+                <Box className={classess.Icons}>
+                  <BsCheck2All />
+                </Box>
+              ) : GMI.Type === "TIP" ? (
+                <Box className={classess.Icons}>
+                  <PiSealCheckThin />
+                </Box>
+              ) : null}
+              {GMI.Type !== null && GMI.Type.split("-")[0] === "TD"
+                ? null
+                : GMI.Target}
+            </Box>
+          ))}
+          {/* {GM.items.map((GMI, Index) =>
             GMI.Type === "TABLE" ? (
               <Box key={Index} className={classess.Table}>
                 {GM.tables.map((GMT, index) => (
@@ -173,7 +227,7 @@ const Bodi = ({ grouped }) => {
                 {GMI.Target}
               </Box>
             ),
-          )}
+          )} */}
         </Box>
       ))}
       <Menu
@@ -360,6 +414,58 @@ const Bodi = ({ grouped }) => {
         >
           <SiRemovedotbg style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Entfernen Beschreibung</span>
+        </MenuItem>
+        {/* HHHHHHHHHHHHHHHHHHHHHHHHH TABLE */}
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "B"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleTD(contextMenu.content)}
+        >
+          <SiAntdesign style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>TD-Titel einfügen</span>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "B"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleEdit(contextMenu.content)}
+        >
+          <DiNetbeans style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>TD-Titel Bearbeiten</span>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "B"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleDeleteTarget(contextMenu.content.id)}
+        >
+          <AiOutlineDelete style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>Löschen TD-Titel</span>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "B"
+                ? "flex"
+                : "none",
+          }}
+        >
+          <SiRemovedotbg style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>Entfernen TD-Titel</span>
         </MenuItem>
       </Menu>
     </Box>

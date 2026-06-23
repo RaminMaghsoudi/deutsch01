@@ -32,8 +32,8 @@ export async function Insert(preveState, formData) {
             : formData.get("Type") === "TIP"
               ? "Ungültig Trinkgeld !!!"
               : formData.get("Type") === "TABLE"
-                ? "Ungültig TD !!!"
-                : "",
+                ? "Ungültig TR !!!"
+                : "Ungültig TD !!!",
     };
 
   const result = await insert(formData);

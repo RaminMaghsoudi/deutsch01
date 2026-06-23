@@ -43,6 +43,7 @@ const Add = () => {
     Editable,
     setEditable,
     showMessage,
+    insertTD,
     setShowMessage,
   } = useContexts();
 
@@ -291,9 +292,31 @@ const Add = () => {
                 setShowMessage(false);
               }}
               className={classess.TitleInput}
-              placeholder="TD"
+              placeholder="TR"
             />
             <input type="hidden" name="Type" value="TABLE" />
+            <input
+              type="hidden"
+              name="Title"
+              value={SelectItems?.Title || ""}
+            />
+            <input type="hidden" name="EN" value={SelectItems?.EN || ""} />
+            <input type="hidden" name="FA" value={SelectItems?.FA || ""} />
+          </>
+        ) : Select === "TD-Tabelle hinzufügen" ? (
+          <>
+            <input
+              type="text"
+              name="Target"
+              value={Target}
+              onChange={(e) => {
+                setTarget(e.target.value);
+                setShowMessage(false);
+              }}
+              className={classess.TitleInput}
+              placeholder="TD"
+            />
+            <input type="hidden" name="Type" value={`TD-${insertTD.id}`} />
             <input
               type="hidden"
               name="Title"

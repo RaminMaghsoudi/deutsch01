@@ -16,6 +16,7 @@ export function AppProvider({ children }) {
   const [contextMenu, setContextMenu] = useState(null);
   const [Editable, setEditable] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
+  const [insertTD, setInsertTD] = useState(null);
 
   const ArrayOfMenu = [
     "Titel erstellen",
@@ -49,6 +50,8 @@ export function AppProvider({ children }) {
         setEditable,
         showMessage,
         setShowMessage,
+        insertTD,
+        setInsertTD,
       }}
     >
       {children}
