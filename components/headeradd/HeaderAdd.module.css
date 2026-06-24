@@ -1,0 +1,76 @@
+.HeaderAdd {
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.GiButterfly {
+  font-size: 2rem;
+  color: rgb(36, 2, 68);
+}
+.AI1 {
+  font-family: CL;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+  color: rgb(36, 2, 68);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.AI2 {
+  width: 220px;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(243, 240, 240);
+  box-shadow: 0.2rem 0.2rem 0.2rem gray;
+  border-radius: 5px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  position: absolute;
+  background-color: white;
+  text-align-last: left;
+  z-index: 3000;
+  margin-top: 330px;
+}
+.option {
+  width: 200px;
+  min-height: 45px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: 0.5s;
+  font-family: CL;
+  font-size: 1rem;
+}
+.option2 {
+  border-radius: 5px 5px 0 0;
+}
+.option3 {
+  border-radius: 0 0 5px 5px;
+}
+.option:hover {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+.Divider3 {
+  position: relative;
+  width: 100px;
+  min-height: 1px;
+  background-color: beige;
+  top: 3px;
+}
+.Divider4 {
+  position: relative;
+  width: 50px;
+  min-height: 1px;
+  background-color: beige;
+  top: 6px;
+}

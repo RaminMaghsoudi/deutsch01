@@ -1,9 +1,6 @@
 import Add from "@/components/add/Add";
 import "./globals.css";
-import Wrapper from "@/components/wrapper/Wrapper";
 import { AppProvider } from "./Context";
-import { FetchAll, FetchSTD } from "@/actions";
-import Bodi from "@/components/bodi/Bodi";
 
 export const metadata = {
   title: "Deutsch",
@@ -11,97 +8,10 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const fetchAll = await FetchAll("Laibrary");
-  const fetchSTD = await FetchSTD("Laibrary");
-  const grouped = Object.values(
-    (fetchAll || []).reduce((acc, item) => {
-      const key = item.Title?.trim().toLowerCase() || "";
-      if (!acc[key]) {
-        acc[key] = {
-          Title: item.Title,
-          EN: item.EN,
-          FA: item.FA,
-          ID: item.id,
-          items: [],
-          td: [],
-          std: [],
-        };
-      }
-      acc[key].items.push(item);
-      return acc;
-    }, {}),
-  );
-  const groupedTD = Object.values(
-    (fetchAll || []).reduce((acc, item) => {
-      const key = item.Title?.trim().toLowerCase() || "";
-      if (!acc[key]) {
-        acc[key] = {
-          td: [],
-        };
-      }
-      if (item.Type !== null && item.Type.split("-")[0] === "TD") {
-        acc[key].td.push(item);
-      }
-      return acc;
-    }, {}),
-  );
-
-  // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-  // const grouped = Object.values(
-  //   (fetchAll || []).reduce((acc, item) => {
-  //     const key = item.Title?.trim().toLowerCase() || "";
-  //     if (!acc[key]) {
-  //       acc[key] = {
-  //         Title: item.Title,
-  //         EN: item.EN,
-  //         FA: item.FA,
-  //         ID: item.id,
-  //         items: [],
-  //         td: [],
-  //       };
-  //     }
-  //     acc[key].items.push(item);
-  //     if (item.Type === "TABLE") {
-  //       acc[key].td.push(item);
-  //     }
-  //     return acc;
-  //   }, {}),
-  // );
-  // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-  // const grouped = Object.values(
-  //   (fetchAll || []).reduce((acc, item) => {
-  //     const key = item.Title?.trim().toLowerCase() || "";
-
-  //     if (!acc[key]) {
-  //       acc[key] = {
-  //         Title: item.Title,
-  //         EN: item.EN,
-  //         FA: item.FA,
-  //         ID: item.id,
-  //         items: [],
-  //         td: [],
-  //       };
-  //     }
-
-  //     if (item.Type === "TABLE") {
-  //       acc[key].td.push(item);
-  //     } else {
-  //       acc[key].items.push(item);
-  //     }
-
-  //     return acc;
-  //   }, {}),
-  // );
-
   return (
     <AppProvider>
       <html lang="en">
         <body>
-          {grouped.length === 0 ? (
-            <Wrapper />
-          ) : (
-            <Bodi grouped={grouped} groupedTD={groupedTD} fetchSTD={fetchSTD} />
-          )}
           {children}
           <Add />
         </body>

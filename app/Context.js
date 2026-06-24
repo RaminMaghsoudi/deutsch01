@@ -9,8 +9,8 @@ export function AppProvider({ children }) {
   const [FA, setFA] = useState("");
   const [Target, setTarget] = useState("");
 
-  const [Select, setSelect] = useState("Titel erstellen");
-  const [ShowSelect, setShowSelect] = useState(false);
+  const [SelectMenu, setSelectMenu] = useState("Titel erstellen");
+  const [ShowSelectMenu, setShowSelectMenu] = useState(false);
   const [SelectItems, setSelectItems] = useState(null);
 
   const [contextMenu, setContextMenu] = useState(null);
@@ -22,7 +22,7 @@ export function AppProvider({ children }) {
     "Titel erstellen",
     "Beschreibung hinzufügen",
     "Regel hinzufügen",
-    "Trinkgeld hinzufügen",
+    "Tipp hinzufügen",
     "Tabelle hinzufügen",
   ];
 
@@ -35,11 +35,11 @@ export function AppProvider({ children }) {
         setEN,
         FA,
         setFA,
-        Select,
-        setSelect,
+        SelectMenu,
+        setSelectMenu,
         ArrayOfMenu,
-        ShowSelect,
-        setShowSelect,
+        ShowSelectMenu,
+        setShowSelectMenu,
         SelectItems,
         setSelectItems,
         Target,
