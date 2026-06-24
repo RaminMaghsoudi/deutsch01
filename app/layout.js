@@ -2,7 +2,7 @@ import Add from "@/components/add/Add";
 import "./globals.css";
 import Wrapper from "@/components/wrapper/Wrapper";
 import { AppProvider } from "./Context";
-import { FetchAll } from "@/actions";
+import { FetchAll, FetchSTD } from "@/actions";
 import Bodi from "@/components/bodi/Bodi";
 
 export const metadata = {
@@ -12,6 +12,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const fetchAll = await FetchAll("Laibrary");
+  const fetchSTD = await FetchSTD("Laibrary");
   const grouped = Object.values(
     (fetchAll || []).reduce((acc, item) => {
       const key = item.Title?.trim().toLowerCase() || "";
@@ -22,7 +23,8 @@ export default async function RootLayout({ children }) {
           FA: item.FA,
           ID: item.id,
           items: [],
-          tables: [],
+          td: [],
+          std: [],
         };
       }
       acc[key].items.push(item);
@@ -34,15 +36,16 @@ export default async function RootLayout({ children }) {
       const key = item.Title?.trim().toLowerCase() || "";
       if (!acc[key]) {
         acc[key] = {
-          tables: [],
+          td: [],
         };
       }
       if (item.Type !== null && item.Type.split("-")[0] === "TD") {
-        acc[key].tables.push(item);
+        acc[key].td.push(item);
       }
       return acc;
     }, {}),
   );
+
   // HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
   // const grouped = Object.values(
   //   (fetchAll || []).reduce((acc, item) => {
@@ -54,12 +57,12 @@ export default async function RootLayout({ children }) {
   //         FA: item.FA,
   //         ID: item.id,
   //         items: [],
-  //         tables: [],
+  //         td: [],
   //       };
   //     }
   //     acc[key].items.push(item);
   //     if (item.Type === "TABLE") {
-  //       acc[key].tables.push(item);
+  //       acc[key].td.push(item);
   //     }
   //     return acc;
   //   }, {}),
@@ -76,12 +79,12 @@ export default async function RootLayout({ children }) {
   //         FA: item.FA,
   //         ID: item.id,
   //         items: [],
-  //         tables: [],
+  //         td: [],
   //       };
   //     }
 
   //     if (item.Type === "TABLE") {
-  //       acc[key].tables.push(item);
+  //       acc[key].td.push(item);
   //     } else {
   //       acc[key].items.push(item);
   //     }
@@ -97,7 +100,7 @@ export default async function RootLayout({ children }) {
           {grouped.length === 0 ? (
             <Wrapper />
           ) : (
-            <Bodi grouped={grouped} groupedTD={groupedTD} />
+            <Bodi grouped={grouped} groupedTD={groupedTD} fetchSTD={fetchSTD} />
           )}
           {children}
           <Add />

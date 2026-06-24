@@ -4,6 +4,7 @@ import {
   deletes,
   deletestarget,
   fetchAll,
+  fetchSTD,
   insert,
   update,
   updatetarget,
@@ -16,6 +17,9 @@ function isInvalidText(text) {
 }
 export async function FetchAll(table) {
   return fetchAll(table);
+}
+export async function FetchSTD(table) {
+  return fetchSTD(table);
 }
 export async function Insert(preveState, formData) {
   if (isInvalidText(formData.get("Title")))

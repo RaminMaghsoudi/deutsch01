@@ -27,7 +27,7 @@ import { useRouter } from "next/navigation";
 import { SiAnydesk } from "react-icons/si";
 import { SiAntdesign } from "react-icons/si";
 
-const Bodi = ({ grouped, groupedTD }) => {
+const Bodi = ({ grouped, groupedTD, fetchSTD }) => {
   const router = useRouter();
   const {
     SelectItems,
@@ -77,7 +77,9 @@ const Bodi = ({ grouped, groupedTD }) => {
     if (
       contextMenu.status === "D" ||
       contextMenu.status === "R" ||
-      contextMenu.status === "P"
+      contextMenu.status === "P" ||
+      contextMenu.status === "B" ||
+      contextMenu.status === "C"
     ) {
       setEditable({ status: contextMenu.status, id: content.id });
       setTarget(content.Target);
@@ -88,7 +90,9 @@ const Bodi = ({ grouped, groupedTD }) => {
             ? "Regel hinzufügen"
             : contextMenu.status === "P"
               ? "Trinkgeld hinzufügen"
-              : null,
+              : contextMenu.status === "B" || contextMenu.status === "C"
+                ? "TD-Tabelle hinzufügen"
+                : null,
       );
     }
     handleClose();
@@ -103,14 +107,10 @@ const Bodi = ({ grouped, groupedTD }) => {
     handleClose();
   };
   const handleTD = (content) => {
-    //setEditable({ status: contextMenu.status, id: content.id });
-    setInsertTD(content);
+    setInsertTD({ content: content, status: contextMenu.status });
     setSelect("TD-Tabelle hinzufügen");
     handleClose();
   };
-
-  console.log(groupedTD);
-  console.log(grouped);
 
   return (
     <Box className={classess.Bodi}>
@@ -118,7 +118,7 @@ const Bodi = ({ grouped, groupedTD }) => {
         <Box
           key={ID}
           className={classess.Items}
-          onClick={() => setSelectItems(GM)}
+          onClick={() => setSelectItems(SelectItems === null ? GM : null)}
           sx={{
             backgroundColor:
               SelectItems !== null
@@ -145,59 +145,8 @@ const Bodi = ({ grouped, groupedTD }) => {
             <span className={classess.UT_EN}>{GM.EN} :</span>
           </Box>
           {GM.items.map((GMI, Index) => (
-            <Box
-              key={Index}
-              className={
-                GMI.Type === "DESCRIPTION"
-                  ? classess.UbensDescription
-                  : GMI.Type === "RULE"
-                    ? classess.UbensRule
-                    : GMI.Type === "TIP"
-                      ? classess.UbensTip
-                      : GMI.Type === "TABLE"
-                        ? classess.UbensTable
-                        : ""
-              }
-              onContextMenu={(e) =>
-                handleContextMenu(
-                  e,
-                  GMI,
-                  GMI.Type === "RULE"
-                    ? "R"
-                    : GMI.Type === "TIP"
-                      ? "P"
-                      : GMI.Type === "DESCRIPTION"
-                        ? "D"
-                        : "B",
-                )
-              }
-            >
-              {GMI.Type === "RULE" ? (
-                <Box className={classess.Icons}>
-                  <BsCheck2All />
-                </Box>
-              ) : GMI.Type === "TIP" ? (
-                <Box className={classess.Icons}>
-                  <PiSealCheckThin />
-                </Box>
-              ) : null}
-              {GMI.Type !== null && GMI.Type.split("-")[0] === "TD"
-                ? null
-                : GMI.Target}
-            </Box>
-          ))}
-          {/* {GM.items.map((GMI, Index) =>
-            GMI.Type === "TABLE" ? (
-              <Box key={Index} className={classess.Table}>
-                {GM.tables.map((GMT, index) => (
-                  <Box key={index} className={classess.TD}>
-                    {GMT.Target}
-                  </Box>
-                ))}
-              </Box>
-            ) : (
+            <div key={Index}>
               <Box
-                key={Index}
                 className={
                   GMI.Type === "DESCRIPTION"
                     ? classess.UbensDescription
@@ -205,13 +154,21 @@ const Bodi = ({ grouped, groupedTD }) => {
                       ? classess.UbensRule
                       : GMI.Type === "TIP"
                         ? classess.UbensTip
-                        : ""
+                        : GMI.Type === "TABLE"
+                          ? classess.UbensTable
+                          : ""
                 }
                 onContextMenu={(e) =>
                   handleContextMenu(
                     e,
                     GMI,
-                    GMI.Type === "RULE" ? "R" : GMI.Type === "TIP" ? "P" : "D",
+                    GMI.Type === "RULE"
+                      ? "R"
+                      : GMI.Type === "TIP"
+                        ? "P"
+                        : GMI.Type === "DESCRIPTION"
+                          ? "D"
+                          : "B",
                   )
                 }
               >
@@ -224,10 +181,39 @@ const Bodi = ({ grouped, groupedTD }) => {
                     <PiSealCheckThin />
                   </Box>
                 ) : null}
-                {GMI.Target}
+                {GMI.Type !== null &&
+                (GMI.Type.split("-")[0] === "TD" ||
+                  GMI.Type.split("-")[0] === "STD")
+                  ? null
+                  : GMI.Target}
               </Box>
-            ),
-          )} */}
+              <Box className={classess.TDS}>
+                {groupedTD[ID].td.length !== 0
+                  ? groupedTD[ID].td.map((GTT, Counter) =>
+                      Number(GTT.Type.split("-")[1]) === GMI.id ? (
+                        <div key={Counter} style={{ marginBottom: "25px" }}>
+                          <Box
+                            className={classess.TD}
+                            onContextMenu={(e) =>
+                              handleContextMenu(e, GTT, "C")
+                            }
+                          >
+                            {GTT.Target}
+                          </Box>
+                          {fetchSTD.map((FSTD, Loops) =>
+                            Number(FSTD.Type.split("-")[1]) === GTT.id ? (
+                              <Box key={Loops} className={classess.STD}>
+                                {FSTD.Target}
+                              </Box>
+                            ) : null,
+                          )}
+                        </div>
+                      ) : null,
+                    )
+                  : null}
+              </Box>
+            </div>
+          ))}
         </Box>
       ))}
       <Menu
@@ -429,6 +415,14 @@ const Bodi = ({ grouped, groupedTD }) => {
           <SiAntdesign style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>TD-Titel einfügen</span>
         </MenuItem>
+        <Divider
+          sx={{
+            display:
+              contextMenu !== null && contextMenu.status === "B"
+                ? "flex"
+                : "none",
+          }}
+        />
         <MenuItem
           sx={{
             fontFamily: "CL",
@@ -467,7 +461,68 @@ const Bodi = ({ grouped, groupedTD }) => {
           <SiRemovedotbg style={{ fontSize: "1.1rem", marginTop: "2px" }} />
           <span className={classess.Icon}>Entfernen TD-Titel</span>
         </MenuItem>
+        {/* HHHHHHHHHHHHHHHHHHHHHHHHH TDS */}
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "C"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleTD(contextMenu.content)}
+        >
+          <SiAntdesign style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>TD-Untertitel einfügen</span>
+        </MenuItem>
+        <Divider
+          sx={{
+            display:
+              contextMenu !== null && contextMenu.status === "C"
+                ? "flex"
+                : "none",
+          }}
+        />
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "C"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleEdit(contextMenu.content)}
+        >
+          <DiNetbeans style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>TD-Untertitel Bearbeiten</span>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "C"
+                ? "flex"
+                : "none",
+          }}
+          onClick={() => handleDeleteTarget(contextMenu.content.id)}
+        >
+          <AiOutlineDelete style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>Löschen TD-Untertitel</span>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "CL",
+            display:
+              contextMenu !== null && contextMenu.status === "C"
+                ? "flex"
+                : "none",
+          }}
+        >
+          <SiRemovedotbg style={{ fontSize: "1.1rem", marginTop: "2px" }} />
+          <span className={classess.Icon}>Entfernen TD-Untertitel</span>
+        </MenuItem>
       </Menu>
+      <Box sx={{ minHeight: "100px" }}></Box>
     </Box>
   );
 };

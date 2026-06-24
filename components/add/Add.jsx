@@ -54,7 +54,9 @@ const Add = () => {
         ? Update
         : Editable.status === "D" ||
             Editable.status === "R" ||
-            Editable.status === "P"
+            Editable.status === "P" ||
+            Editable.status === "B" ||
+            Editable.status === "C"
           ? UpdateTarget
           : Insert,
     {
@@ -316,7 +318,15 @@ const Add = () => {
               className={classess.TitleInput}
               placeholder="TD"
             />
-            <input type="hidden" name="Type" value={`TD-${insertTD.id}`} />
+            <input
+              type="hidden"
+              name="Type"
+              value={
+                insertTD.status === "B"
+                  ? `TD-${insertTD.content.id}`
+                  : `STD-${insertTD.content.id}`
+              }
+            />
             <input
               type="hidden"
               name="Title"
