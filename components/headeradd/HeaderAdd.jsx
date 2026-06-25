@@ -10,6 +10,7 @@ import { PiUmbrellaLight } from "react-icons/pi";
 import { GoArrowUpRight } from "react-icons/go";
 import { RxLayers } from "react-icons/rx";
 import { PiLampPendantLight } from "react-icons/pi";
+import { IoMdLocate } from "react-icons/io";import { LiaCertificateSolid } from "react-icons/lia";
 
 const HeaderAdd = () => {
   const {
@@ -87,8 +88,21 @@ const HeaderAdd = () => {
                 setShowSelectMenu(false);
               }}
             >
-              <RxLayers style={{ marginRight: "10px", fontSize: "18px" }} />
+              <LiaCertificateSolid
+                style={{ marginRight: "10px", fontSize: "18px" }}
+              />
               {ArrayOfMenu[4]}
+            </Box>
+            <Box
+              value="Tip"
+              className={`${classess.option} ${classess.option3}`}
+              onClick={() => {
+                setSelectMenu(ArrayOfMenu[5]);
+                setShowSelectMenu(false);
+              }}
+            >
+              <RxLayers style={{ marginRight: "10px", fontSize: "18px" }} />
+              {ArrayOfMenu[5]}
             </Box>
           </Box>
         </ClickAwayListener>

@@ -1,6 +1,9 @@
 import Add from "@/components/add/Add";
 import "./globals.css";
 import { AppProvider } from "./Context";
+import ProtectedLayout from "./(protected)/layout";
+import Bodi from "@/components/bodi/Bodi";
+import { FetchAll } from "@/actions";
 
 export const metadata = {
   title: "Deutsch",
@@ -8,12 +11,32 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const fetchAll = await FetchAll("Laibrary");
+  const grouped = Object.values(
+    (fetchAll || []).reduce((acc, item) => {
+      const key = item.Title?.trim().toLowerCase() || "";
+      if (!acc[key]) {
+        acc[key] = {
+          Title: item.Title,
+          EN: item.EN,
+          FA: item.FA,
+          ID: item.id,
+          items: [],
+        };
+      }
+      acc[key].items.push(item);
+      return acc;
+    }, {}),
+  );
+
   return (
     <AppProvider>
       <html lang="en">
         <body>
-          {children}
-          <Add />
+          <ProtectedLayout>
+            <Add grouped={grouped} />
+            <Bodi grouped={grouped} />
+          </ProtectedLayout>
         </body>
       </html>
     </AppProvider>

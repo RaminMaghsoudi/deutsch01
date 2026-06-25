@@ -1,0 +1,125 @@
+.Bodi {
+  width: calc(100% - 300px);
+  height: 100vh;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  align-items: center;
+  margin-left: 300px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.Bodi::-webkit-scrollbar {
+  display: none;
+}
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+}
+.GiButterfly {
+  font-size: 3rem;
+  color: rgb(36, 2, 68);
+  margin-top: -150px;
+}
+.Der {
+  font-family: CL;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: rgb(22, 1, 41);
+  text-shadow: 0 0 0.1rem rgb(22, 1, 41);
+}
+.Nutzen {
+  font-family: CL;
+  text-transform: upperase;
+  color: rgb(22, 1, 41);
+  width: 250px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+.Card {
+  width: calc(100% - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  margin-left: 0px;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.CardTitle {
+  font-family: CL;
+  font-size: 1.1rem;
+  color: rgb(9, 85, 81);
+  font-weight: bold;
+  padding-right: 15px;
+  /* text-shadow: 0rem 0rem 0.1rem rgba(56, 56, 56, 0.5); */
+}
+.TiWeatherSunny {
+  position: relative;
+  margin-right: 5px;
+  top: 3px;
+  font-size: 18px;
+  color: rgb(9, 85, 81);
+}
+.CardEN {
+  font-family: CL;
+  font-size: 1rem;
+  color: rgb(9, 85, 81, 0.7);
+  margin-left: 0px;
+  margin-top: -3px;
+  /* text-shadow: 0rem 0rem 0.1rem rgba(56, 56, 56, 0.5); */
+}
+.Wrapper {
+  width: 100%;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  align-items: flex-start;
+  text-align: right;
+}
+.Description {
+  font-family: CL;
+  color: rgb(0, 32, 31);
+}
+.Rule {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px 15px 5px 15px;
+  padding: 10px 14px;
+  border: 1px solid rgba(190, 24, 93, 0.15);
+  border-radius: 12px;
+  background: linear-gradient(to right, #ffffff 0%, #fdf2f8 50%, #fce7f3 100%);
+  color: #831843;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(190, 24, 93, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.Icons {
+  min-width: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

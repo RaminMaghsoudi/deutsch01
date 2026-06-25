@@ -4,54 +4,61 @@ import { createContext, useContext, useState } from "react";
 const AC = createContext(null);
 
 export function AppProvider({ children }) {
+  const [SelectMenu, setSelectMenu] = useState("Titel erstellen");
+  const [ShowSelectMenu, setShowSelectMenu] = useState(false);
+  const [ShowMessage, setShowMessage] = useState(false);
+  const [SelectItems, setSelectItems] = useState(null);
+  const [Loading, setLoading] = useState(true);
+  const [contextMenu, setContextMenu] = useState(null);
+
+  const [Editable, setEditable] = useState(null);
+
   const [Title, setTitle] = useState("");
   const [EN, setEN] = useState("");
   const [FA, setFA] = useState("");
-  const [Target, setTarget] = useState("");
-
-  const [SelectMenu, setSelectMenu] = useState("Titel erstellen");
-  const [ShowSelectMenu, setShowSelectMenu] = useState(false);
-  const [SelectItems, setSelectItems] = useState(null);
-
-  const [contextMenu, setContextMenu] = useState(null);
-  const [Editable, setEditable] = useState(null);
-  const [showMessage, setShowMessage] = useState(false);
-  const [insertTD, setInsertTD] = useState(null);
+  const [Desc, setDesc] = useState("");
+  const [Rule, setRule] = useState("");
+  const [Tip, setTip] = useState("");
 
   const ArrayOfMenu = [
     "Titel erstellen",
     "Beschreibung hinzufügen",
     "Regel hinzufügen",
     "Tipp hinzufügen",
+    "Beispiel hinzufügen",
     "Tabelle hinzufügen",
   ];
 
   return (
     <AC.Provider
       value={{
+        SelectMenu,
+        setSelectMenu,
+        ArrayOfMenu,
+        ShowSelectMenu,
+        setShowSelectMenu,
+        ShowMessage,
+        setShowMessage,
+        SelectItems,
+        setSelectItems,
+        Loading,
+        setLoading,
+        contextMenu,
+        setContextMenu,
+        Editable,
+        setEditable,
         Title,
         setTitle,
         EN,
         setEN,
         FA,
         setFA,
-        SelectMenu,
-        setSelectMenu,
-        ArrayOfMenu,
-        ShowSelectMenu,
-        setShowSelectMenu,
-        SelectItems,
-        setSelectItems,
-        Target,
-        setTarget,
-        contextMenu,
-        setContextMenu,
-        Editable,
-        setEditable,
-        showMessage,
-        setShowMessage,
-        insertTD,
-        setInsertTD,
+        Desc,
+        setDesc,
+        Rule,
+        setRule,
+        Tip,
+        setTip,
       }}
     >
       {children}
