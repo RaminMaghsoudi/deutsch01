@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { Delete, DeleteTarget } from "@/actions";
 import { BsCheck2All } from "react-icons/bs";
 import { PiSealCheckThin } from "react-icons/pi";
+import { TiPointOfInterest } from "react-icons/ti";
 
 const Bodi = ({ grouped }) => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const Bodi = ({ grouped }) => {
     setShowMessage,
     setDesc,
     setRule,
+    setTip,
   } = useContexts();
 
   const handleContextMenu = (event, content, status) => {
@@ -60,6 +62,12 @@ const Bodi = ({ grouped }) => {
       setSelectMenu(ArrayOfMenu[2]);
       setSelectItems(null);
     }
+    if (content.status === "CP") {
+      setEditable(content);
+      setTip(content.content.Target);
+      setSelectMenu(ArrayOfMenu[3]);
+      setSelectItems(null);
+    }
     setContextMenu(null);
   };
   const RemoveEditable = () => {
@@ -67,6 +75,9 @@ const Bodi = ({ grouped }) => {
     setTitle("");
     setEN("");
     setFA("");
+    setDesc("");
+    setRule("");
+    setTip("");
     setSelectItems(null);
     setShowMessage(false);
     setContextMenu(null);
@@ -83,7 +94,10 @@ const Bodi = ({ grouped }) => {
   const handleDeleteTarget = async (id) => {
     try {
       const result = await DeleteTarget(id);
-      if (result.success) router.refresh();
+      if (result.success) {
+        router.refresh();
+        RemoveEditable();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -94,8 +108,7 @@ const Bodi = ({ grouped }) => {
     <Box
       className={classess.Bodi}
       onClick={() => {
-        setSelectItems(null);
-        setEditable(null);
+        RemoveEditable();
       }}
     >
       {grouped.length === 0 ? (
@@ -129,6 +142,7 @@ const Bodi = ({ grouped }) => {
                       ? "greenyellow"
                       : "white"
                 }`,
+              boxShadow: " 0rem 0rem 0.3rem gray",
             }}
           >
             <span
@@ -136,10 +150,11 @@ const Bodi = ({ grouped }) => {
               onContextMenu={(e) => handleContextMenu(e, GM, "CT")}
             >
               {GM.Title}
+              {GM.EN.length === 0 ? null : (
+                <span className={classess.CardEN}>: {GM.EN}</span>
+              )}
             </span>
-            {GM.EN.length === 0 ? null : (
-              <span className={classess.CardEN}>{GM.EN}</span>
-            )}
+
             {GM.items.map((GMI, Index) => (
               <Box key={Index} className={classess.Wrapper}>
                 <Box
@@ -168,15 +183,15 @@ const Bodi = ({ grouped }) => {
                     )
                   }
                 >
-                  {GMI.Type === "RULE" ? (
+                  {/* {GMI.Type === "RULE" ? (
                     <Box className={classess.Icons}>
-                      <BsCheck2All />
+                      <BsCheck2All size={18} />
                     </Box>
                   ) : GMI.Type === "TIP" ? (
                     <Box className={classess.Icons}>
-                      <PiSealCheckThin />
+                      <TiPointOfInterest />
                     </Box>
-                  ) : null}
+                  ) : null} */}
                   {GMI.Target}
                 </Box>
               </Box>
@@ -192,6 +207,7 @@ const Bodi = ({ grouped }) => {
           </Card>
         ))
       )}
+      <Box sx={{ width: "100%", minHeight: "100px", flexShrink: "0" }}></Box>
     </Box>
   );
 };

@@ -114,3 +114,20 @@ export async function DeleteTarget(id) {
     };
   }
 }
+export async function Save(prevState, formData) {
+  const mode = formData.get("mode");
+  switch (mode) {
+    case "insert":
+      return Insert(prevState, formData);
+    case "update":
+      return Update(prevState, formData);
+    case "updateTarget":
+      return UpdateTarget(prevState, formData);
+    default:
+      return {
+        success: false,
+        message: "Der Modus ist ungültig.",
+        timestamp: Date.now(),
+      };
+  }
+}

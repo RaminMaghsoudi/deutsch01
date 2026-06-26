@@ -9,7 +9,8 @@ import BTN from "../btn/BTN";
 import Description from "./Description";
 import Rules from "./Rules";
 import Tips from "./Tips";
-import { Insert, Update, UpdateTarget } from "@/actions";
+import { Save } from "@/actions";
+import Tables from "./Tables";
 
 const Form = ({ grouped }) => {
   const prevTimestamp = useRef(null);
@@ -34,21 +35,15 @@ const Form = ({ grouped }) => {
     setTip,
     Editable,
     setEditable,
+    Table,
+    setTable,
   } = useContexts();
 
-  const [state, formAction] = useActionState(
-    Editable === null
-      ? Insert
-      : Editable.status === "CD" || Editable.status === "CR"
-        ? UpdateTarget
-        : Update,
-    {
-      success: false,
-      message: null,
-      timestamp: null,
-    },
-  );
-
+  const [state, formAction] = useActionState(Save, {
+    success: false,
+    message: null,
+    timestamp: null,
+  });
   useEffect(() => {
     if (!state.status) setShowMessage(true);
     if (state.timestamp && state.timestamp !== prevTimestamp.current) {
@@ -114,6 +109,16 @@ const Form = ({ grouped }) => {
           setTip={setTip}
           Editable={Editable}
         />
+      ) : SelectMenu === ArrayOfMenu[4] ? (
+        "455664545"
+      ) : SelectMenu === ArrayOfMenu[5] ? (
+        <Tables
+          setShowMessage={setShowMessage}
+          SelectItems={SelectItems}
+          Table={Table}
+          setTable={setTable}
+          Editable={Editable}
+        />
       ) : null}
       <BTN padding="12px 22px 12px 22px" color="rgb(36, 2, 68)">
         in der Datenbank speichern
@@ -123,6 +128,19 @@ const Form = ({ grouped }) => {
           {state.message}
         </Box>
       )}
+      <input
+        type="hidden"
+        name="mode"
+        value={
+          Editable === null
+            ? "insert"
+            : Editable.status === "CD" ||
+                Editable.status === "CR" ||
+                Editable.status === "CP"
+              ? "updateTarget"
+              : "update"
+        }
+      />
     </form>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import MCT from "./MCT";
 import MCD from "./MCD";
 import MCR from "./MCR";
+import MCP from "./MCP";
 
 const Menus = ({
   contextMenu,
@@ -65,6 +66,12 @@ const Menus = ({
             />
           ) : card === "CR" ? (
             <MCR
+              contextMenu={contextMenu}
+              handleEdit={handleEdit}
+              handleDeleteTarget={handleDeleteTarget}
+            />
+          ) : card === "CP" ? (
+            <MCP
               contextMenu={contextMenu}
               handleEdit={handleEdit}
               handleDeleteTarget={handleDeleteTarget}
