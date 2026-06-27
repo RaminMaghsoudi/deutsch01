@@ -4,6 +4,8 @@ import MCT from "./MCT";
 import MCD from "./MCD";
 import MCR from "./MCR";
 import MCP from "./MCP";
+import MTDS from "./MTDS";
+import MTD from "./MTD";
 
 const Menus = ({
   contextMenu,
@@ -11,6 +13,8 @@ const Menus = ({
   handleEdit,
   handleDelete,
   handleDeleteTarget,
+  handleTD,
+  handleSTD,
 }) => {
   return (
     <>
@@ -75,6 +79,20 @@ const Menus = ({
               contextMenu={contextMenu}
               handleEdit={handleEdit}
               handleDeleteTarget={handleDeleteTarget}
+            />
+          ) : card === "TDS" ? (
+            <MTDS
+              contextMenu={contextMenu}
+              handleEdit={handleEdit}
+              handleDeleteTarget={handleDeleteTarget}
+              handleTD={handleTD}
+            />
+          ) : card === "CTD" ? (
+            <MTD
+              contextMenu={contextMenu}
+              handleEdit={handleEdit}
+              handleDeleteTarget={handleDeleteTarget}
+              handleSTD={handleSTD}
             />
           ) : null}
         </Menu>

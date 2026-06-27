@@ -3,7 +3,7 @@ import "./globals.css";
 import { AppProvider } from "./Context";
 import ProtectedLayout from "./(protected)/layout";
 import Bodi from "@/components/bodi/Bodi";
-import { FetchAll } from "@/actions";
+import { FetchAll, FetchSTD, FetchTD } from "@/actions";
 
 export const metadata = {
   title: "Deutsch",
@@ -12,6 +12,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const fetchAll = await FetchAll("Laibrary");
+  const fetchTD = await FetchTD("Laibrary");
+  const fetchSTD = await FetchSTD("Laibrary");
   const grouped = Object.values(
     (fetchAll || []).reduce((acc, item) => {
       const key = item.Title?.trim().toLowerCase() || "";
@@ -35,7 +37,7 @@ export default async function RootLayout({ children }) {
         <body>
           <ProtectedLayout>
             <Add grouped={grouped} />
-            <Bodi grouped={grouped} />
+            <Bodi grouped={grouped} fetchTD={fetchTD} fetchSTD={fetchSTD} />
           </ProtectedLayout>
         </body>
       </html>

@@ -28,6 +28,8 @@ export function AppProvider({ children }) {
     "Tipp hinzufügen",
     "Beispiel hinzufügen",
     "Tabelle hinzufügen",
+    "TD-Tabelle hinzufügen",
+    "STD-Tabelle hinzufügen",
   ];
 
   return (

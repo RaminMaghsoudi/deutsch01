@@ -11,6 +11,8 @@ import Rules from "./Rules";
 import Tips from "./Tips";
 import { Save } from "@/actions";
 import Tables from "./Tables";
+import TD from "./TD";
+import STD from "./STD";
 
 const Form = ({ grouped }) => {
   const prevTimestamp = useRef(null);
@@ -53,6 +55,7 @@ const Form = ({ grouped }) => {
       setFA("");
       setDesc("");
       setRule("");
+      setTable("");
       setEditable(null);
       setSelectItems(null);
       setShowMessage(true);
@@ -70,6 +73,7 @@ const Form = ({ grouped }) => {
     setEditable,
     setDesc,
     setRule,
+    setTable,
   ]);
 
   return (
@@ -119,6 +123,22 @@ const Form = ({ grouped }) => {
           setTable={setTable}
           Editable={Editable}
         />
+      ) : SelectMenu === ArrayOfMenu[6] ? (
+        <TD
+          setShowMessage={setShowMessage}
+          SelectItems={SelectItems}
+          Table={Table}
+          setTable={setTable}
+          Editable={Editable}
+        />
+      ) : SelectMenu === ArrayOfMenu[7] ? (
+        <STD
+          setShowMessage={setShowMessage}
+          SelectItems={SelectItems}
+          Table={Table}
+          setTable={setTable}
+          Editable={Editable}
+        />
       ) : null}
       <BTN padding="12px 22px 12px 22px" color="rgb(36, 2, 68)">
         in der Datenbank speichern
@@ -136,7 +156,9 @@ const Form = ({ grouped }) => {
             ? "insert"
             : Editable.status === "CD" ||
                 Editable.status === "CR" ||
-                Editable.status === "CP"
+                Editable.status === "CP" ||
+                Editable.status === "TDS" ||
+                Editable.status === "CTD"
               ? "updateTarget"
               : "update"
         }

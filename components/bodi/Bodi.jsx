@@ -9,10 +9,11 @@ import Menus from "../menus/Menus";
 import { useRouter } from "next/navigation";
 import { Delete, DeleteTarget } from "@/actions";
 import { BsCheck2All } from "react-icons/bs";
-import { PiSealCheckThin } from "react-icons/pi";
-import { TiPointOfInterest } from "react-icons/ti";
+import { LuCoffee } from "react-icons/lu";
+import Image from "next/image";
+import U from "../../public/U.jpg";
 
-const Bodi = ({ grouped }) => {
+const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
   const router = useRouter();
   const {
     contextMenu,
@@ -30,6 +31,7 @@ const Bodi = ({ grouped }) => {
     setDesc,
     setRule,
     setTip,
+    setTable,
   } = useContexts();
 
   const handleContextMenu = (event, content, status) => {
@@ -68,6 +70,18 @@ const Bodi = ({ grouped }) => {
       setSelectMenu(ArrayOfMenu[3]);
       setSelectItems(null);
     }
+    if (content.status === "TDS") {
+      setEditable(content);
+      setTable(content.content.Target);
+      setSelectMenu(ArrayOfMenu[5]);
+      setSelectItems(null);
+    }
+    if (content.status === "CTD") {
+      setEditable(content);
+      setTable(content.content.Target);
+      setSelectMenu(ArrayOfMenu[5]);
+      setSelectItems(null);
+    }
     setContextMenu(null);
   };
   const RemoveEditable = () => {
@@ -78,6 +92,7 @@ const Bodi = ({ grouped }) => {
     setDesc("");
     setRule("");
     setTip("");
+    setTable("");
     setSelectItems(null);
     setShowMessage(false);
     setContextMenu(null);
@@ -103,6 +118,16 @@ const Bodi = ({ grouped }) => {
     }
     setContextMenu(null);
   };
+  const handleTD = (content) => {
+    setSelectMenu(ArrayOfMenu[6]);
+    setSelectItems(content.content);
+    setContextMenu(null);
+  };
+  const handleSTD = (content) => {
+    setSelectMenu(ArrayOfMenu[7]);
+    setSelectItems(content.content);
+    setContextMenu(null);
+  };
 
   return (
     <Box
@@ -121,7 +146,7 @@ const Bodi = ({ grouped }) => {
         </Box>
       ) : (
         grouped.map((GM, ID) => (
-          <Card
+          <Box
             key={ID}
             className={classess.Card}
             onClick={(e) => {
@@ -142,69 +167,96 @@ const Bodi = ({ grouped }) => {
                       ? "greenyellow"
                       : "white"
                 }`,
-              boxShadow: " 0rem 0rem 0.3rem gray",
             }}
           >
-            <span
+            <Box
               className={classess.CardTitle}
               onContextMenu={(e) => handleContextMenu(e, GM, "CT")}
             >
-              {GM.Title}
+              <Image src={U} alt="line" width={30} height={30} />
+              <span className={classess.CT}>{GM.Title}</span>
               {GM.EN.length === 0 ? null : (
-                <span className={classess.CardEN}>: {GM.EN}</span>
+                <span className={classess.EN}>{GM.EN}</span>
               )}
-            </span>
-
-            {GM.items.map((GMI, Index) => (
-              <Box key={Index} className={classess.Wrapper}>
-                <Box
-                  className={
-                    GMI.Type === "DESCRIPTION"
-                      ? classess.Description
-                      : GMI.Type === "RULE"
-                        ? classess.Rule
-                        : GMI.Type === "TIP"
-                          ? classess.Tip
-                          : GMI.Type === "TABLE"
-                            ? classess.Table
-                            : ""
-                  }
-                  onContextMenu={(e) =>
-                    handleContextMenu(
-                      e,
-                      GMI,
-                      GMI.Type === "RULE"
-                        ? "CR"
-                        : GMI.Type === "TIP"
-                          ? "CP"
-                          : GMI.Type === "DESCRIPTION"
-                            ? "CD"
-                            : null,
-                    )
-                  }
-                >
-                  {/* {GMI.Type === "RULE" ? (
-                    <Box className={classess.Icons}>
-                      <BsCheck2All size={18} />
-                    </Box>
-                  ) : GMI.Type === "TIP" ? (
-                    <Box className={classess.Icons}>
-                      <TiPointOfInterest />
-                    </Box>
-                  ) : null} */}
-                  {GMI.Target}
-                </Box>
-              </Box>
-            ))}
-            <Menus
-              contextMenu={contextMenu}
-              setContextMenu={setContextMenu}
-              card={contextMenu !== null && contextMenu.status}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-              handleDeleteTarget={handleDeleteTarget}
-            />
-          </Card>
+            </Box>
+            <Box className={classess.CardInfo}>
+              {GM.items.map((GMI, Index) => (
+                <div key={Index}>
+                  <Box
+                    className={
+                      GMI.Type === "DESCRIPTION"
+                        ? classess.Description
+                        : GMI.Type === "RULE"
+                          ? classess.Rule
+                          : GMI.Type === "TIP"
+                            ? classess.Tip
+                            : GMI.Type === "TABLE"
+                              ? classess.Table
+                              : ""
+                    }
+                    onContextMenu={(e) =>
+                      handleContextMenu(
+                        e,
+                        GMI,
+                        GMI.Type === "RULE"
+                          ? "CR"
+                          : GMI.Type === "TIP"
+                            ? "CP"
+                            : GMI.Type === "DESCRIPTION"
+                              ? "CD"
+                              : GMI.Type === "TABLE"
+                                ? "TDS"
+                                : null,
+                      )
+                    }
+                  >
+                    {GMI.Type === "RULE" ? (
+                      <Box className={classess.Icons}>
+                        <BsCheck2All size={18} />
+                      </Box>
+                    ) : GMI.Type === "TIP" ? (
+                      <Box className={classess.Icons}>
+                        <LuCoffee />
+                      </Box>
+                    ) : null}
+                    {GMI.Type?.startsWith("TD") || GMI.Type?.startsWith("STD")
+                      ? null
+                      : GMI.Target}
+                  </Box>
+                  <Box className={classess.TDS}>
+                    {fetchTD.map((FTD, INDEX) =>
+                      GMI.Type?.startsWith("TABLE") &&
+                      GMI.Type !== null &&
+                      Number(FTD.Type.split("-")[1]) === GMI.id ? (
+                        <Box
+                          key={INDEX}
+                          className={classess.TD}
+                          onContextMenu={(e) =>
+                            handleContextMenu(e, FTD, "CTD")
+                          }
+                        >
+                          {FTD.Target}
+                        </Box>
+                      ) : null,
+                    )}
+                  </Box>
+                  <Box className={classess.STDS}>{fetchTD.map((FTD, INDEX) => (
+                    {FTD.Type?.startsWith("TD")&& }
+                  ))}</Box>
+                </div>
+              ))}
+              <Menus
+                contextMenu={contextMenu}
+                setContextMenu={setContextMenu}
+                card={contextMenu !== null && contextMenu.status}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                handleDeleteTarget={handleDeleteTarget}
+                handleTD={handleTD}
+                handleSTD={handleSTD}
+              />
+            </Box>
+          </Box>
         ))
       )}
       <Box sx={{ width: "100%", minHeight: "100px", flexShrink: "0" }}></Box>

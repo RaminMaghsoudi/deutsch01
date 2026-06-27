@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import classess from "./Form.module.css";
 
-const Tables = ({ setShowMessage, SelectItems, Table, setTable, Editable }) => {
+const STD = ({ setShowMessage, SelectItems, Table, setTable, Editable }) => {
   return (
     <Fragment>
       <input
@@ -13,9 +13,13 @@ const Tables = ({ setShowMessage, SelectItems, Table, setTable, Editable }) => {
           setShowMessage(false);
         }}
         className={classess.TitleInput}
-        placeholder="Tabelle hinzufügen"
+        placeholder="STD hinzufügen"
       />
-      <input type="hidden" name="Type" value="TABLE" />
+      <input
+        type="hidden"
+        name="Type"
+        value={`STD-${SelectItems?.id | null}`}
+      />
       <input
         type="hidden"
         name="Title"
@@ -36,4 +40,4 @@ const Tables = ({ setShowMessage, SelectItems, Table, setTable, Editable }) => {
   );
 };
 
-export default Tables;
+export default STD;

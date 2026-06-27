@@ -5,6 +5,7 @@ import {
   deletestarget,
   fetchAll,
   fetchSTD,
+  fetchTD,
   insert,
   update,
   updatetarget,
@@ -20,9 +21,36 @@ export async function FetchAll(table) {
 export async function FetchSTD(table) {
   return fetchSTD(table);
 }
+export async function FetchTD(table) {
+  return fetchTD(table);
+}
 export async function Insert(preveState, formData) {
   if (isInvalidText(formData.get("Title")))
     return { success: false, message: "Ungültig Title !!!" };
+
+  if (
+    formData.get("Type") === "DESCRIPTION" &&
+    isInvalidText(formData.get("Target"))
+  )
+    return { success: false, message: "Ungültig beschreibung !!!" };
+  if (formData.get("Type") === "RULE" && isInvalidText(formData.get("Target")))
+    return { success: false, message: "Ungültig regel !!!" };
+  if (formData.get("Type") === "RULE" && isInvalidText(formData.get("Target")))
+    return { success: false, message: "Ungültig regel !!!" };
+  if (formData.get("Type") === "TIP" && isInvalidText(formData.get("Target")))
+    return { success: false, message: "Ungültig tipp !!!" };
+  if (formData.get("Type") === "TABLE" && isInvalidText(formData.get("Target")))
+    return { success: false, message: "Ungültig table !!!" };
+  if (
+    formData.get("Type").startsWith("TD") &&
+    isInvalidText(formData.get("Target"))
+  )
+    return { success: false, message: "Ungültig TD !!!" };
+  if (
+    formData.get("Type").startsWith("STD") &&
+    isInvalidText(formData.get("Target"))
+  )
+    return { success: false, message: "Ungültig STD !!!" };
 
   const result = await insert(formData);
   if (!result.success) {
