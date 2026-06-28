@@ -173,7 +173,13 @@ const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
               className={classess.CardTitle}
               onContextMenu={(e) => handleContextMenu(e, GM, "CT")}
             >
-              <Image src={U} alt="line" width={30} height={30} />
+              <Image
+                src={U}
+                alt="line"
+                width={30}
+                height={30}
+                className={classess.U}
+              />
               <span className={classess.CT}>{GM.Title}</span>
               {GM.EN.length === 0 ? null : (
                 <span className={classess.EN}>{GM.EN}</span>
@@ -228,21 +234,26 @@ const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
                       GMI.Type?.startsWith("TABLE") &&
                       GMI.Type !== null &&
                       Number(FTD.Type.split("-")[1]) === GMI.id ? (
-                        <Box
-                          key={INDEX}
-                          className={classess.TD}
-                          onContextMenu={(e) =>
-                            handleContextMenu(e, FTD, "CTD")
-                          }
-                        >
-                          {FTD.Target}
+                        <Box key={INDEX}>
+                          <Box
+                            className={classess.TD}
+                            onContextMenu={(e) =>
+                              handleContextMenu(e, FTD, "CTD")
+                            }
+                          >
+                            {FTD.Target}
+                          </Box>
+                          {fetchSTD.map((FSTD, INDEX) =>
+                            Number(FSTD.Type.split("-")[1]) === FTD.id ? (
+                              <Box key={INDEX} className={classess.STDS}>
+                                {FSTD.Target}
+                              </Box>
+                            ) : null,
+                          )}
                         </Box>
                       ) : null,
                     )}
                   </Box>
-                  <Box className={classess.STDS}>{fetchTD.map((FTD, INDEX) => (
-                    {FTD.Type?.startsWith("TD")&& }
-                  ))}</Box>
                 </div>
               ))}
               <Menus

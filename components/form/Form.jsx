@@ -5,6 +5,7 @@ import React, { useActionState, useEffect, useRef } from "react";
 import classess from "./Form.module.css";
 import { useContexts } from "@/app/Context";
 import Titles from "./Titles";
+import Examples from "./Examples";
 import BTN from "../btn/BTN";
 import Description from "./Description";
 import Rules from "./Rules";
@@ -39,6 +40,12 @@ const Form = ({ grouped }) => {
     setEditable,
     Table,
     setTable,
+    Example,
+    setExample,
+    ExampleEN,
+    setExampleEN,
+    ExampleFA,
+    setExampleFA,
   } = useContexts();
 
   const [state, formAction] = useActionState(Save, {
@@ -114,7 +121,16 @@ const Form = ({ grouped }) => {
           Editable={Editable}
         />
       ) : SelectMenu === ArrayOfMenu[4] ? (
-        "455664545"
+        <Examples
+          setShowMessage={setShowMessage}
+          Example={Example}
+          setExample={setExample}
+          ExampleEN={ExampleEN}
+          setExampleEN={setExampleEN}
+          ExampleFA={ExampleFA}
+          setExampleFA={setExampleFA}
+          Editable={Editable}
+        />
       ) : SelectMenu === ArrayOfMenu[5] ? (
         <Tables
           setShowMessage={setShowMessage}

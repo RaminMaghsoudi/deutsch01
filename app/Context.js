@@ -20,6 +20,9 @@ export function AppProvider({ children }) {
   const [Rule, setRule] = useState("");
   const [Tip, setTip] = useState("");
   const [Table, setTable] = useState("");
+  const [Example, setExample] = useState("");
+  const [ExampleEN, setExampleEN] = useState("");
+  const [ExampleFA, setExampleFA] = useState("");
 
   const ArrayOfMenu = [
     "Titel erstellen",
@@ -64,6 +67,12 @@ export function AppProvider({ children }) {
         setTip,
         Table,
         setTable,
+        Example,
+        setExample,
+        ExampleEN,
+        setExampleEN,
+        ExampleFA,
+        setExampleFA,
       }}
     >
       {children}

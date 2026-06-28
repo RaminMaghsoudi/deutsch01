@@ -29,24 +29,42 @@ export async function Insert(preveState, formData) {
     return { success: false, message: "Ungültig Title !!!" };
 
   if (
-    formData.get("Type") === "DESCRIPTION" &&
+    (formData.get("Type") !== null && formData.get("Type")) === "DESCRIPTION" &&
     isInvalidText(formData.get("Target"))
   )
     return { success: false, message: "Ungültig beschreibung !!!" };
-  if (formData.get("Type") === "RULE" && isInvalidText(formData.get("Target")))
+  if (
+    formData.get("Type") !== null &&
+    formData.get("Type") === "RULE" &&
+    isInvalidText(formData.get("Target"))
+  )
     return { success: false, message: "Ungültig regel !!!" };
-  if (formData.get("Type") === "RULE" && isInvalidText(formData.get("Target")))
+  if (
+    formData.get("Type") !== null &&
+    formData.get("Type") === "RULE" &&
+    isInvalidText(formData.get("Target"))
+  )
     return { success: false, message: "Ungültig regel !!!" };
-  if (formData.get("Type") === "TIP" && isInvalidText(formData.get("Target")))
+  if (
+    formData.get("Type") !== null &&
+    formData.get("Type") === "TIP" &&
+    isInvalidText(formData.get("Target"))
+  )
     return { success: false, message: "Ungültig tipp !!!" };
-  if (formData.get("Type") === "TABLE" && isInvalidText(formData.get("Target")))
+  if (
+    formData.get("Type") !== null &&
+    formData.get("Type") === "TABLE" &&
+    isInvalidText(formData.get("Target"))
+  )
     return { success: false, message: "Ungültig table !!!" };
   if (
+    formData.get("Type") !== null &&
     formData.get("Type").startsWith("TD") &&
     isInvalidText(formData.get("Target"))
   )
     return { success: false, message: "Ungültig TD !!!" };
   if (
+    formData.get("Type") !== null &&
     formData.get("Type").startsWith("STD") &&
     isInvalidText(formData.get("Target"))
   )
