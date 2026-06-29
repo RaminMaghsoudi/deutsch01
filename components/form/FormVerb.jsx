@@ -14,6 +14,11 @@ import { Save } from "@/actions";
 import Tables from "./Tables";
 import TD from "./TD";
 import STD from "./STD";
+import { IoIosColorFilter } from "react-icons/io";
+import { IoIosSnow } from "react-icons/io";
+import { IoIosUmbrella } from "react-icons/io";
+import { IoLogoDribbble } from "react-icons/io";
+import VI from "./VI";
 
 const FormVerb = ({ grouped }) => {
   const prevTimestamp = useRef(null);
@@ -84,77 +89,336 @@ const FormVerb = ({ grouped }) => {
   ]);
 
   return (
-    <form action={formAction} className={classess.Form}>
-      {SelectMenu === ArrayOfMenu[0] ? (
-        <Titles
-          setShowMessage={setShowMessage}
-          Title={Title}
-          setTitle={setTitle}
-          EN={EN}
-          setEN={setEN}
-          FA={FA}
-          setFA={setFA}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[1] ? (
-        <Description
-          setShowMessage={setShowMessage}
-          SelectItems={SelectItems}
-          Desc={Desc}
-          setDesc={setDesc}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[2] ? (
-        <Rules
-          setShowMessage={setShowMessage}
-          SelectItems={SelectItems}
-          Rule={Rule}
-          setRule={setRule}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[3] ? (
-        <Tips
-          setShowMessage={setShowMessage}
-          SelectItems={SelectItems}
-          Tip={Tip}
-          setTip={setTip}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[4] ? (
-        <Examples
-          setShowMessage={setShowMessage}
-          Example={Example}
-          setExample={setExample}
-          ExampleEN={ExampleEN}
-          setExampleEN={setExampleEN}
-          ExampleFA={ExampleFA}
-          setExampleFA={setExampleFA}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[5] ? (
-        <Tables
-          setShowMessage={setShowMessage}
-          SelectItems={SelectItems}
-          Table={Table}
-          setTable={setTable}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[6] ? (
-        <TD
-          setShowMessage={setShowMessage}
-          SelectItems={SelectItems}
-          Table={Table}
-          setTable={setTable}
-          Editable={Editable}
-        />
-      ) : SelectMenu === ArrayOfMenu[7] ? (
-        <STD
-          setShowMessage={setShowMessage}
-          SelectItems={SelectItems}
-          Table={Table}
-          setTable={setTable}
-          Editable={Editable}
-        />
+    <form action={formAction} className={classess.FormVerb}>
+      <input
+        type="text"
+        name="Title"
+        value={Title}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb"
+      />
+      <input
+        type="text"
+        name="EN"
+        value={EN}
+        onChange={(e) => {
+          setEN(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-EN"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-FA"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH  Präsens */}
+      <Box className={classess.TitleType}>
+        <IoIosColorFilter className={classess.Time} />
+        <span className={classess.TimeSpan}>Präsens</span>
+      </Box>
+      <VI
+        title="ICH"
+        name="FA"
+        value={FA}
+        Change={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+      />
+      <VI
+        title="DU"
+        name="FA"
+        value={FA}
+        Change={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+      />
+      <VI
+        title="ER/SIE/ES"
+        name="FA"
+        value={FA}
+        Change={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+      />
+      <VI
+        title="WIR"
+        name="FA"
+        value={FA}
+        Change={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+      />
+      <VI
+        title="IHR"
+        name="FA"
+        value={FA}
+        Change={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+      />
+      <VI
+        title="sie/Sie"
+        name="FA"
+        value={FA}
+        Change={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH Präteritum*/}
+      <Box className={classess.TitleType}>
+        <IoIosSnow className={classess.Time} />
+        <span className={classess.TimeSpan}>Präteritum</span>
+      </Box>
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH Perfekt*/}
+      <Box className={classess.TitleType}>
+        <IoLogoDribbble className={classess.Time} />
+        <span className={classess.TimeSpan}>Perfekt</span>
+      </Box>
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH Futur*/}
+      <Box className={classess.TitleType}>
+        <IoIosUmbrella className={classess.Time} />
+        <span className={classess.TimeSpan}>Futur</span>
+      </Box>
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      <input
+        type="text"
+        name="FA"
+        value={FA}
+        onChange={(e) => {
+          setFA(e.target.value);
+          setShowMessage(false);
+        }}
+        className={classess.TitleInput}
+        placeholder="Verb-Aussprache"
+      />
+      {Editable !== null ? (
+        <input type="hidden" name="OldTitle" value={Editable.content.Title} />
       ) : null}
       <BTN padding="12px 22px 12px 22px" color="rgb(36, 2, 68)">
         in der Datenbank speichern
