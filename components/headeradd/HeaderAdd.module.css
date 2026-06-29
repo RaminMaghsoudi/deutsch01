@@ -6,10 +6,22 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: -30px;
 }
 .GiButterfly {
   font-size: 2rem;
   color: rgb(36, 2, 68);
+}
+.AI0 {
+  font-family: CL;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+  color: rgb(36, 2, 68);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
 }
 .AI1 {
   font-family: CL;
@@ -35,7 +47,7 @@
   background-color: white;
   text-align-last: left;
   z-index: 3000;
-  margin-top: 330px;
+  margin-top: 400px;
 }
 .option {
   width: 200px;

@@ -1,0 +1,39 @@
+.HeaderAdd {
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: -30px;
+}
+.GiButterfly {
+  font-size: 2rem;
+  color: rgb(36, 2, 68);
+}
+.AI0 {
+  font-family: CL;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+  color: rgb(36, 2, 68);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+}
+.Divider3 {
+  position: relative;
+  width: 100px;
+  min-height: 1px;
+  background-color: beige;
+  top: 3px;
+}
+.Divider4 {
+  position: relative;
+  width: 50px;
+  min-height: 1px;
+  background-color: beige;
+  top: 6px;
+}

@@ -4,8 +4,26 @@ import { createContext, useContext, useState } from "react";
 const AC = createContext(null);
 
 export function AppProvider({ children }) {
-  const [SelectMenu, setSelectMenu] = useState("Titel erstellen");
+  const ArrayOfMenu = [
+    "Titel erstellen",
+    "Beschreibung hinzufügen",
+    "Regel hinzufügen",
+    "Tipp hinzufügen",
+    "Beispiel hinzufügen",
+    "Tabelle hinzufügen",
+    "TD-Tabelle hinzufügen",
+    "STD-Tabelle hinzufügen",
+  ];
+  const ArrayOfMainMenu = [
+    "Füge eine Lernkarte hinzu",
+    "Konjugation von Verben",
+    "Vorschriften und Konstanten",
+  ];
+
+  const [SelectMenu, setSelectMenu] = useState(ArrayOfMenu[0]);
+  const [SelectMainMenu, setSelectMainMenu] = useState(ArrayOfMainMenu[0]);
   const [ShowSelectMenu, setShowSelectMenu] = useState(false);
+  const [ShowMainMenu, setShowMainMenu] = useState(false);
   const [ShowMessage, setShowMessage] = useState(false);
   const [SelectItems, setSelectItems] = useState(null);
   const [Loading, setLoading] = useState(true);
@@ -23,17 +41,6 @@ export function AppProvider({ children }) {
   const [Example, setExample] = useState("");
   const [ExampleEN, setExampleEN] = useState("");
   const [ExampleFA, setExampleFA] = useState("");
-
-  const ArrayOfMenu = [
-    "Titel erstellen",
-    "Beschreibung hinzufügen",
-    "Regel hinzufügen",
-    "Tipp hinzufügen",
-    "Beispiel hinzufügen",
-    "Tabelle hinzufügen",
-    "TD-Tabelle hinzufügen",
-    "STD-Tabelle hinzufügen",
-  ];
 
   return (
     <AC.Provider
@@ -73,6 +80,11 @@ export function AppProvider({ children }) {
         setExampleEN,
         ExampleFA,
         setExampleFA,
+        ShowMainMenu,
+        setShowMainMenu,
+        ArrayOfMainMenu,
+        SelectMainMenu,
+        setSelectMainMenu,
       }}
     >
       {children}

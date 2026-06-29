@@ -10,7 +10,8 @@ import { PiUmbrellaLight } from "react-icons/pi";
 import { GoArrowUpRight } from "react-icons/go";
 import { RxLayers } from "react-icons/rx";
 import { PiLampPendantLight } from "react-icons/pi";
-import { IoMdLocate } from "react-icons/io";import { LiaCertificateSolid } from "react-icons/lia";
+import { IoMdLocate } from "react-icons/io";
+import { LiaCertificateSolid } from "react-icons/lia";
 
 const HeaderAdd = () => {
   const {
@@ -19,11 +20,13 @@ const HeaderAdd = () => {
     ArrayOfMenu,
     ShowSelectMenu,
     setShowSelectMenu,
+    SelectMainMenu,
   } = useContexts();
 
   return (
     <Box className={classess.HeaderAdd}>
       <GiButterfly className={classess.GiButterfly} />
+      <span className={classess.AI0}>{SelectMainMenu}</span>
       <span className={classess.AI1} onClick={() => setShowSelectMenu(true)}>
         {SelectMenu}
       </span>
