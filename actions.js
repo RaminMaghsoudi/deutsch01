@@ -7,6 +7,7 @@ import {
   fetchSTD,
   fetchTD,
   insert,
+  insertverb,
   update,
   updatetarget,
 } from "./lib/daten";
@@ -71,6 +72,24 @@ export async function Insert(preveState, formData) {
     return { success: false, message: "Ungültig STD !!!" };
 
   const result = await insert(formData);
+  if (!result.success) {
+    return {
+      success: false,
+      message: result.message,
+    };
+  } else if (result.success) {
+    revalidatePath(`/`);
+    return {
+      success: true,
+      message: result.message,
+      timestamp: Date.now(),
+    };
+  }
+}
+export async function InsertVerb(preveState, formData) {
+  if (isInvalidText(formData.get("Verb")))
+    return { success: false, message: "Ungültig Verb !!!" };
+  const result = await insertverb(formData);
   if (!result.success) {
     return {
       success: false,
@@ -169,6 +188,8 @@ export async function Save(prevState, formData) {
       return Update(prevState, formData);
     case "updateTarget":
       return UpdateTarget(prevState, formData);
+    case "insertverb":
+      return InsertVerb(prevState, formData);
     default:
       return {
         success: false,

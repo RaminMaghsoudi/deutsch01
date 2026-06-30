@@ -4,55 +4,35 @@ import { Box } from "@mui/material";
 import React, { useActionState, useEffect, useRef } from "react";
 import classess from "./Form.module.css";
 import { useContexts } from "@/app/Context";
-import Titles from "./Titles";
-import Examples from "./Examples";
-import BTN from "../btn/BTN";
-import Description from "./Description";
-import Rules from "./Rules";
-import Tips from "./Tips";
-import { Save } from "@/actions";
-import Tables from "./Tables";
-import TD from "./TD";
-import STD from "./STD";
 import { IoIosColorFilter } from "react-icons/io";
 import { IoIosSnow } from "react-icons/io";
 import { IoIosUmbrella } from "react-icons/io";
 import { IoLogoDribbble } from "react-icons/io";
 import VI from "./VI";
+import BTN from "../btn/BTN";
+import { Save } from "@/actions";
 
 const FormVerb = ({ grouped }) => {
   const prevTimestamp = useRef(null);
   const {
-    SelectMenu,
-    ArrayOfMenu,
+    VM,
+    VM1,
+    setVM1,
+    VN,
+    VS1,
+    setVS1,
+    VS2,
+    setVS2,
+    VS3,
+    setVS3,
+    VS4,
+    setVS4,
     ShowMessage,
     setShowMessage,
-    SelectItems,
-    setSelectItems,
-    Title,
-    setTitle,
-    EN,
-    setEN,
-    FA,
-    setFA,
-    Desc,
-    setDesc,
-    Rule,
-    setRule,
-    Tip,
-    setTip,
     Editable,
     setEditable,
-    Table,
-    setTable,
-    Example,
-    setExample,
-    ExampleEN,
-    setExampleEN,
-    ExampleFA,
-    setExampleFA,
+    setSelectItems,
   } = useContexts();
-
   const [state, formAction] = useActionState(Save, {
     success: false,
     message: null,
@@ -62,15 +42,47 @@ const FormVerb = ({ grouped }) => {
     if (!state.status) setShowMessage(true);
     if (state.timestamp && state.timestamp !== prevTimestamp.current) {
       prevTimestamp.current = state.timestamp;
-      setTitle("");
-      setEN("");
-      setFA("");
-      setDesc("");
-      setRule("");
-      setTable("");
       setEditable(null);
       setSelectItems(null);
       setShowMessage(true);
+      setVS1({
+        ICH: "",
+        DU: "",
+        ER: "",
+        WIR: "",
+        IHR: "",
+        SIE: "",
+      });
+      setVS2({
+        ICH: "",
+        DU: "",
+        ER: "",
+        WIR: "",
+        IHR: "",
+        SIE: "",
+      });
+      setVS3({
+        ICH: "",
+        DU: "",
+        ER: "",
+        WIR: "",
+        IHR: "",
+        SIE: "",
+      });
+      setVS4({
+        ICH: "",
+        DU: "",
+        ER: "",
+        WIR: "",
+        IHR: "",
+        SIE: "",
+      });
+      setVM1({
+        Verb: "",
+        EN: "",
+        FA: "",
+        Spell: "",
+      });
       const timer = setTimeout(() => setShowMessage(false), 2000);
       return () => clearTimeout(timer);
     }
@@ -78,348 +90,122 @@ const FormVerb = ({ grouped }) => {
     state.status,
     setShowMessage,
     state.timestamp,
-    setEN,
-    setFA,
-    setTitle,
     setSelectItems,
     setEditable,
-    setDesc,
-    setRule,
-    setTable,
+    setVS1,
+    setVS2,
+    setVS3,
+    setVS4,
+    setVM1,
   ]);
 
   return (
     <form action={formAction} className={classess.FormVerb}>
-      <input
-        type="text"
-        name="Title"
-        value={Title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb"
-      />
-      <input
-        type="text"
-        name="EN"
-        value={EN}
-        onChange={(e) => {
-          setEN(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-EN"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-FA"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
+      {VM.map((item) => (
+        <input
+          key={item}
+          type="text"
+          placeholder={
+            item === "Verb"
+              ? "Verb"
+              : item === "EN"
+                ? "Verb-EN"
+                : item === "FA"
+                  ? "Verb-FA"
+                  : "Aussprache"
+          }
+          name={item}
+          value={VM1[item]}
+          onChange={(e) => {
+            setVM1((prev) => ({
+              ...prev,
+              [item]: e.target.value,
+            }));
+            setShowMessage(false);
+          }}
+          className={classess.TitleInput}
+        />
+      ))}
       {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH  Präsens */}
       <Box className={classess.TitleType}>
         <IoIosColorFilter className={classess.Time} />
         <span className={classess.TimeSpan}>Präsens</span>
       </Box>
-      <VI
-        title="ICH"
-        name="FA"
-        value={FA}
-        Change={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-      />
-      <VI
-        title="DU"
-        name="FA"
-        value={FA}
-        Change={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-      />
-      <VI
-        title="ER/SIE/ES"
-        name="FA"
-        value={FA}
-        Change={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-      />
-      <VI
-        title="WIR"
-        name="FA"
-        value={FA}
-        Change={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-      />
-      <VI
-        title="IHR"
-        name="FA"
-        value={FA}
-        Change={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-      />
-      <VI
-        title="sie/Sie"
-        name="FA"
-        value={FA}
-        Change={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
+      {VN.map((item, ID) => (
+        <VI
+          key={item}
+          title={item === "SIE" ? "sie/Sie" : item}
+          name={`Present${ID + 1}`}
+          value={VS1[item]}
+          Change={(e) => {
+            setVS1((prev) => ({
+              ...prev,
+              [item]: e.target.value,
+            }));
+            setShowMessage(false);
+          }}
+        />
+      ))}
       {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH Präteritum*/}
       <Box className={classess.TitleType}>
         <IoIosSnow className={classess.Time} />
         <span className={classess.TimeSpan}>Präteritum</span>
       </Box>
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
+      {VN.map((item, ID) => (
+        <VI
+          key={item}
+          title={item === "SIE" ? "sie/Sie" : item}
+          name={`Past${ID + 1}`}
+          value={VS2[item]}
+          Change={(e) => {
+            setVS2((prev) => ({
+              ...prev,
+              [item]: e.target.value,
+            }));
+            setShowMessage(false);
+          }}
+        />
+      ))}
       {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH Perfekt*/}
       <Box className={classess.TitleType}>
         <IoLogoDribbble className={classess.Time} />
         <span className={classess.TimeSpan}>Perfekt</span>
       </Box>
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
+      {VN.map((item, ID) => (
+        <VI
+          key={item}
+          title={item === "SIE" ? "sie/Sie" : item}
+          name={`Perfect${ID + 1}`}
+          value={VS3[item]}
+          Change={(e) => {
+            setVS3((prev) => ({
+              ...prev,
+              [item]: e.target.value,
+            }));
+            setShowMessage(false);
+          }}
+        />
+      ))}
       {/* HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH Futur*/}
       <Box className={classess.TitleType}>
         <IoIosUmbrella className={classess.Time} />
         <span className={classess.TimeSpan}>Futur</span>
       </Box>
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      <input
-        type="text"
-        name="FA"
-        value={FA}
-        onChange={(e) => {
-          setFA(e.target.value);
-          setShowMessage(false);
-        }}
-        className={classess.TitleInput}
-        placeholder="Verb-Aussprache"
-      />
-      {Editable !== null ? (
-        <input type="hidden" name="OldTitle" value={Editable.content.Title} />
-      ) : null}
+      {VN.map((item, ID) => (
+        <VI
+          key={item}
+          title={item === "SIE" ? "sie/Sie" : item}
+          name={`Future${ID + 1}`}
+          value={VS4[item]}
+          Change={(e) => {
+            setVS4((prev) => ({
+              ...prev,
+              [item]: e.target.value,
+            }));
+            setShowMessage(false);
+          }}
+        />
+      ))}
       <BTN padding="12px 22px 12px 22px" color="rgb(36, 2, 68)">
         in der Datenbank speichern
       </BTN>
@@ -433,16 +219,13 @@ const FormVerb = ({ grouped }) => {
         name="mode"
         value={
           Editable === null
-            ? "insert"
-            : Editable.status === "CD" ||
-                Editable.status === "CR" ||
-                Editable.status === "CP" ||
-                Editable.status === "TDS" ||
-                Editable.status === "CTD"
+            ? "insertverb"
+            : Editable.status === "CD"
               ? "updateTarget"
               : "update"
         }
       />
+      <Box sx={{ width: "100%", minHeight: "100px", flexShrink: "0" }}></Box>
     </form>
   );
 };

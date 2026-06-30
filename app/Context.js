@@ -42,6 +42,47 @@ export function AppProvider({ children }) {
   const [ExampleEN, setExampleEN] = useState("");
   const [ExampleFA, setExampleFA] = useState("");
 
+  const VM = ["Verb", "EN", "FA", "Spell"];
+  const [VM1, setVM1] = useState({
+    Verb: "",
+    EN: "",
+    FA: "",
+    Spell: "",
+  });
+  const VN = ["ICH", "DU", "ER", "WIR", "IHR", "SIE"];
+  const [VS1, setVS1] = useState({
+    ICH: "",
+    DU: "",
+    ER: "",
+    WIR: "",
+    IHR: "",
+    SIE: "",
+  });
+  const [VS2, setVS2] = useState({
+    ICH: "",
+    DU: "",
+    ER: "",
+    WIR: "",
+    IHR: "",
+    SIE: "",
+  });
+  const [VS3, setVS3] = useState({
+    ICH: "",
+    DU: "",
+    ER: "",
+    WIR: "",
+    IHR: "",
+    SIE: "",
+  });
+  const [VS4, setVS4] = useState({
+    ICH: "",
+    DU: "",
+    ER: "",
+    WIR: "",
+    IHR: "",
+    SIE: "",
+  });
+
   return (
     <AC.Provider
       value={{
@@ -85,6 +126,18 @@ export function AppProvider({ children }) {
         ArrayOfMainMenu,
         SelectMainMenu,
         setSelectMainMenu,
+        VM,
+        VM1,
+        setVM1,
+        VN,
+        VS1,
+        setVS1,
+        VS2,
+        setVS2,
+        VS3,
+        setVS3,
+        VS4,
+        setVS4,
       }}
     >
       {children}

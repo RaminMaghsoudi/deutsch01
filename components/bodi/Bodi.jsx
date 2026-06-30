@@ -12,8 +12,11 @@ import { BsCheck2All } from "react-icons/bs";
 import { LuCoffee } from "react-icons/lu";
 import Image from "next/image";
 import U from "../../public/U.jpg";
+import { PiCardsThree } from "react-icons/pi";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { BiChevronRight } from "react-icons/bi";
 
-const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
+const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
   const router = useRouter();
   const {
     contextMenu,
@@ -32,6 +35,8 @@ const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
     setRule,
     setTip,
     setTable,
+    SelectMainMenu,
+    ArrayOfMainMenu,
   } = useContexts();
 
   const handleContextMenu = (event, content, status) => {
@@ -136,26 +141,27 @@ const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
         RemoveEditable();
       }}
     >
-      {grouped.length === 0 ? (
-        <Box className={classess.Wrapper}>
-          <GiButterfly className={classess.GiButterfly} />
-          <span className={classess.Der}>Der Erfolg gehört mir.</span>
-          <span className={classess.Nutzen}>
-            Nutzen Sie das Menü auf der linken Seite, um fortzufahren.
-          </span>
-        </Box>
-      ) : (
-        grouped.map((GM, ID) => (
-          <Box
-            key={ID}
-            className={classess.Card}
-            onClick={(e) => {
-              e.stopPropagation();
-              RemoveEditable();
-            }}
-            onDoubleClick={() => setSelectItems(GM)}
-            sx={{
-              borderLeft: `2px solid
+      {SelectMainMenu === ArrayOfMainMenu[0] ? (
+        grouped.length === 0 ? (
+          <Box className={classess.Wrapper}>
+            <GiButterfly className={classess.GiButterfly} />
+            <span className={classess.Der}>Der Erfolg gehört mir.</span>
+            <span className={classess.Nutzen}>
+              Nutzen Sie das Menü auf der linken Seite, um fortzufahren.
+            </span>
+          </Box>
+        ) : (
+          grouped.map((GM, ID) => (
+            <Box
+              key={ID}
+              className={classess.Card}
+              onClick={(e) => {
+                e.stopPropagation();
+                RemoveEditable();
+              }}
+              onDoubleClick={() => setSelectItems(GM)}
+              sx={{
+                borderLeft: `2px solid
                 ${
                   Editable !== null &&
                   Editable.content.Title.trim().toLowerCase() ===
@@ -167,109 +173,369 @@ const Bodi = ({ grouped, fetchTD, fetchSTD }) => {
                       ? "greenyellow"
                       : "white"
                 }`,
-            }}
-          >
-            <Box
-              className={classess.CardTitle}
-              onContextMenu={(e) => handleContextMenu(e, GM, "CT")}
+                minHeight: "125px",
+              }}
             >
-              <Image
-                src={U}
-                alt="line"
-                width={30}
-                height={30}
-                className={classess.U}
-              />
-              <span className={classess.CT}>{GM.Title}</span>
-              {GM.EN.length === 0 ? null : (
-                <span className={classess.EN}>{GM.EN}</span>
-              )}
-            </Box>
-            <Box className={classess.CardInfo}>
-              {GM.items.map((GMI, Index) => (
-                <div key={Index}>
-                  <Box
-                    className={
-                      GMI.Type === "DESCRIPTION"
-                        ? classess.Description
-                        : GMI.Type === "RULE"
-                          ? classess.Rule
-                          : GMI.Type === "TIP"
-                            ? classess.Tip
-                            : GMI.Type === "TABLE"
-                              ? classess.Table
-                              : ""
-                    }
-                    onContextMenu={(e) =>
-                      handleContextMenu(
-                        e,
-                        GMI,
-                        GMI.Type === "RULE"
-                          ? "CR"
-                          : GMI.Type === "TIP"
-                            ? "CP"
-                            : GMI.Type === "DESCRIPTION"
-                              ? "CD"
+              <Box
+                className={classess.CardTitle}
+                onContextMenu={(e) => handleContextMenu(e, GM, "CT")}
+                sx={{ minHeight: "125px", width: "300px" }}
+              >
+                <Image
+                  src={U}
+                  alt="line"
+                  width={30}
+                  height={30}
+                  className={classess.U}
+                />
+                <span className={classess.CT}>{GM.Title}</span>
+                {GM.EN.length === 0 ? null : (
+                  <span className={classess.EN}>{GM.EN}</span>
+                )}
+              </Box>
+              <Box
+                className={classess.CardInfo}
+                sx={{ minHeight: "125px", width: "calc(100% - 300px)" }}
+              >
+                {GM.items.map((GMI, Index) => (
+                  <div key={Index}>
+                    <Box
+                      className={
+                        GMI.Type === "DESCRIPTION"
+                          ? classess.Description
+                          : GMI.Type === "RULE"
+                            ? classess.Rule
+                            : GMI.Type === "TIP"
+                              ? classess.Tip
                               : GMI.Type === "TABLE"
-                                ? "TDS"
-                                : null,
-                      )
-                    }
-                  >
-                    {GMI.Type === "RULE" ? (
-                      <Box className={classess.Icons}>
-                        <BsCheck2All size={18} />
-                      </Box>
-                    ) : GMI.Type === "TIP" ? (
-                      <Box className={classess.Icons}>
-                        <LuCoffee />
-                      </Box>
-                    ) : null}
-                    {GMI.Type?.startsWith("TD") || GMI.Type?.startsWith("STD")
-                      ? null
-                      : GMI.Target}
-                  </Box>
-                  <Box className={classess.TDS}>
-                    {fetchTD.map((FTD, INDEX) =>
-                      GMI.Type?.startsWith("TABLE") &&
-                      GMI.Type !== null &&
-                      Number(FTD.Type.split("-")[1]) === GMI.id ? (
-                        <Box key={INDEX}>
-                          <Box
-                            className={classess.TD}
-                            onContextMenu={(e) =>
-                              handleContextMenu(e, FTD, "CTD")
-                            }
-                          >
-                            {FTD.Target}
-                          </Box>
-                          {fetchSTD.map((FSTD, INDEX) =>
-                            Number(FSTD.Type.split("-")[1]) === FTD.id ? (
-                              <Box key={INDEX} className={classess.STDS}>
-                                {FSTD.Target}
-                              </Box>
-                            ) : null,
-                          )}
+                                ? classess.Table
+                                : ""
+                      }
+                      onContextMenu={(e) =>
+                        handleContextMenu(
+                          e,
+                          GMI,
+                          GMI.Type === "RULE"
+                            ? "CR"
+                            : GMI.Type === "TIP"
+                              ? "CP"
+                              : GMI.Type === "DESCRIPTION"
+                                ? "CD"
+                                : GMI.Type === "TABLE"
+                                  ? "TDS"
+                                  : null,
+                        )
+                      }
+                    >
+                      {GMI.Type === "RULE" ? (
+                        <Box className={classess.Icons}>
+                          <BsCheck2All size={18} />
                         </Box>
-                      ) : null,
-                    )}
-                  </Box>
-                </div>
-              ))}
-              <Menus
-                contextMenu={contextMenu}
-                setContextMenu={setContextMenu}
-                card={contextMenu !== null && contextMenu.status}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                handleDeleteTarget={handleDeleteTarget}
-                handleTD={handleTD}
-                handleSTD={handleSTD}
-              />
+                      ) : GMI.Type === "TIP" ? (
+                        <Box className={classess.Icons}>
+                          <LuCoffee />
+                        </Box>
+                      ) : null}
+                      {GMI.Type?.startsWith("TD") || GMI.Type?.startsWith("STD")
+                        ? null
+                        : GMI.Target}
+                    </Box>
+                    <Box className={classess.TDS}>
+                      {fetchTD.map((FTD, INDEX) =>
+                        GMI.Type?.startsWith("TABLE") &&
+                        GMI.Type !== null &&
+                        Number(FTD.Type.split("-")[1]) === GMI.id ? (
+                          <Box key={INDEX}>
+                            <Box
+                              className={classess.TD}
+                              onContextMenu={(e) =>
+                                handleContextMenu(e, FTD, "CTD")
+                              }
+                            >
+                              {FTD.Target}
+                            </Box>
+                            {fetchSTD.map((FSTD, INDEX) =>
+                              Number(FSTD.Type.split("-")[1]) === FTD.id ? (
+                                <Box key={INDEX} className={classess.STDS}>
+                                  {FSTD.Target}
+                                </Box>
+                              ) : null,
+                            )}
+                          </Box>
+                        ) : null,
+                      )}
+                    </Box>
+                  </div>
+                ))}
+                <Menus
+                  contextMenu={contextMenu}
+                  setContextMenu={setContextMenu}
+                  card={contextMenu !== null && contextMenu.status}
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                  handleDeleteTarget={handleDeleteTarget}
+                  handleTD={handleTD}
+                  handleSTD={handleSTD}
+                />
+              </Box>
             </Box>
+          ))
+        )
+      ) : SelectMainMenu === ArrayOfMainMenu[1] ? (
+        fetchAllRule.length === 0 ? (
+          <Box className={classess.Wrapper}>
+            <GiButterfly className={classess.GiButterfly} />
+            <span className={classess.Der}>Der Erfolg gehört mir.</span>
+            <span className={classess.Nutzen}>
+              Nutzen Sie das Menü auf der linken Seite, um fortzufahren.
+            </span>
           </Box>
-        ))
-      )}
+        ) : (
+          fetchAllRule.map((FAR, ID) => (
+            <Box
+              key={ID}
+              className={classess.Card}
+              sx={{
+                borderLeft: `2px solid white`,
+                minHeight: "200px",
+              }}
+            >
+              <Box
+                className={classess.CardTitle}
+                sx={{ minHeight: "200px", width: "150px" }}
+              >
+                <PiCardsThree className={classess.PiCardsThree} />
+                <span className={classess.CT}>{FAR.Verb}</span>
+                {FAR.EN.length === 0 ? null : (
+                  <span className={classess.EN}>{FAR.EN}</span>
+                )}
+              </Box>
+              <Box
+                className={classess.CardInfoVerb}
+                sx={{ minHeight: "200px", width: "calc(100% - 150px)" }}
+              >
+                <Box
+                  className={classess.CIV}
+                  sx={{ minHeight: "200px", width: "25%" }}
+                >
+                  <span className={classess.CIVText}>Futur</span>
+                  {FAR.Future1.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Future1}
+                    </span>
+                  )}
+                  {FAR.Future2.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Future2}
+                    </span>
+                  )}
+                  {FAR.Future3.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Future3}
+                    </span>
+                  )}
+                  {FAR.Future4.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Future4}
+                    </span>
+                  )}
+                  {FAR.Future5.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Future5}
+                    </span>
+                  )}
+                  {FAR.Future6.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Future6}
+                    </span>
+                  )}
+                </Box>
+                <Box
+                  className={classess.CIV}
+                  sx={{ minHeight: "200px", width: "25%" }}
+                >
+                  <span className={classess.CIVText}>Perfekt</span>
+                  {FAR.Perfect1.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Perfect1}
+                    </span>
+                  )}
+                  {FAR.Perfect2.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Perfect2}
+                    </span>
+                  )}
+                  {FAR.Perfect3.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Perfect3}
+                    </span>
+                  )}
+                  {FAR.Perfect4.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Perfect4}
+                    </span>
+                  )}
+                  {FAR.Perfect5.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Perfect5}
+                    </span>
+                  )}
+                  {FAR.Perfect6.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Perfect6}
+                    </span>
+                  )}
+                </Box>
+                <Box
+                  className={classess.CIV}
+                  sx={{ minHeight: "200px", width: "25%" }}
+                >
+                  <span className={classess.CIVText}>Präteritum</span>
+                  {FAR.Past1.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Past1}
+                    </span>
+                  )}
+                  {FAR.Past2.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Past2}
+                    </span>
+                  )}
+                  {FAR.Past3.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Past3}
+                    </span>
+                  )}
+                  {FAR.Past4.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Past4}
+                    </span>
+                  )}
+                  {FAR.Past5.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Past5}
+                    </span>
+                  )}
+                  {FAR.Past6.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Past6}
+                    </span>
+                  )}
+                </Box>
+                <Box
+                  className={classess.CIV}
+                  sx={{ minHeight: "200px", width: "25%" }}
+                >
+                  <span className={classess.CIVText}>Präsens</span>
+                  {FAR.Present1.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Present1}
+                    </span>
+                  )}
+                  {FAR.Present2.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Present2}
+                    </span>
+                  )}
+                  {FAR.Present3.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Present3}
+                    </span>
+                  )}
+                  {FAR.Present4.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Present4}
+                    </span>
+                  )}
+                  {FAR.Present5.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Present5}
+                    </span>
+                  )}
+                  {FAR.Present6.length === 0 ? null : (
+                    <span className={classess.CIVText0}>
+                      <BiChevronRight
+                        className={classess.IoMdCheckmarkCircleOutline}
+                      />
+                      {FAR.Present6}
+                    </span>
+                  )}
+                </Box>
+              </Box>
+            </Box>
+          ))
+        )
+      ) : null}
+
       <Box sx={{ width: "100%", minHeight: "100px", flexShrink: "0" }}></Box>
     </Box>
   );

@@ -12,6 +12,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const fetchAll = await FetchAll("Laibrary");
+  const fetchAllRule = await FetchAll("Rule");
   const fetchTD = await FetchTD("Laibrary");
   const fetchSTD = await FetchSTD("Laibrary");
   const grouped = Object.values(
@@ -37,7 +38,12 @@ export default async function RootLayout({ children }) {
         <body>
           <ProtectedLayout>
             <Add grouped={grouped} />
-            <Bodi grouped={grouped} fetchTD={fetchTD} fetchSTD={fetchSTD} />
+            <Bodi
+              grouped={grouped}
+              fetchTD={fetchTD}
+              fetchSTD={fetchSTD}
+              fetchAllRule={fetchAllRule}
+            />
           </ProtectedLayout>
         </body>
       </html>

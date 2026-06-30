@@ -45,7 +45,6 @@
 }
 .Card {
   width: calc(100% - 70px);
-  min-height: 125px;
   display: flex;
   flex-shrink: 0;
   flex-direction: row;
@@ -63,17 +62,14 @@
   max-height: fit-content;
 }
 .CardTitle {
-  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 125px;
   max-height: fit-content;
 }
 .CardInfo {
-  width: calc(100% - 300px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -83,8 +79,56 @@
   color: rgb(0, 0, 0);
   direction: rtl;
   padding: 10px 10px 10px 10px;
-  min-height: 125px;
   max-height: fit-content;
+}
+.CardInfoVerb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  border-radius: 0 8px 8px 0;
+  color: rgb(0, 0, 0);
+  direction: rtl;
+  padding: 10px 10px 10px 10px;
+  max-height: fit-content;
+}
+.CIV {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: justify;
+  max-height: fit-content;
+}
+.CIVText {
+  /* background: linear-gradient(to left, #ffffff 0%, #fdf2f8 80%, #fce7f3 100%);
+  padding: 5px 15px 5px 5px; */
+  font-family: CL;
+  font-style: italic;
+  text-decoration: underline;
+}
+.CIVText0 {
+  font-family: CL;
+  text-align: left;
+  padding: 1px 10px 1px 0px;
+  display: flex;
+  flex-direction: row-reverse;
+  transition: 0.5s;
+  text-decoration: underline dashed rgb(255, 255, 255);
+}
+.CIVText0:hover {
+  text-decoration: underline dashed rgb(0, 0, 0);
+}
+.IoMdCheckmarkCircleOutline {
+  margin-top: 2px;
+  margin-right: 1px;
+  margin-left: -2px;
+  font-size: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  opacity: 0.5;
+  text-align: justify;
 }
 .Butter {
   font-size: 2rem;
@@ -248,4 +292,8 @@
 }
 .U {
   margin-bottom: 10px;
+}
+.PiCardsThree {
+  font-size: 35px;
+  color: rgb(27, 207, 21);
 }
