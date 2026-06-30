@@ -13,6 +13,7 @@ export function AppProvider({ children }) {
     "Tabelle hinzufügen",
     "TD-Tabelle hinzufügen",
     "STD-Tabelle hinzufügen",
+    "Absatz hinzufügen",
   ];
   const ArrayOfMainMenu = [
     "Füge eine Lernkarte hinzu",
@@ -41,6 +42,7 @@ export function AppProvider({ children }) {
   const [Example, setExample] = useState("");
   const [ExampleEN, setExampleEN] = useState("");
   const [ExampleFA, setExampleFA] = useState("");
+  const [Para, setPara] = useState("");
 
   const VM = ["Verb", "EN", "FA", "Spell"];
   const [VM1, setVM1] = useState({
@@ -138,6 +140,8 @@ export function AppProvider({ children }) {
         setVS3,
         VS4,
         setVS4,
+        Para,
+        setPara,
       }}
     >
       {children}

@@ -14,6 +14,7 @@ import { Save } from "@/actions";
 import Tables from "./Tables";
 import TD from "./TD";
 import STD from "./STD";
+import Parageraph from "./Parageraph";
 
 const Form = ({ grouped }) => {
   const prevTimestamp = useRef(null);
@@ -46,6 +47,8 @@ const Form = ({ grouped }) => {
     setExampleEN,
     ExampleFA,
     setExampleFA,
+    Para,
+    setPara,
   } = useContexts();
 
   const [state, formAction] = useActionState(Save, {
@@ -66,6 +69,9 @@ const Form = ({ grouped }) => {
       setEditable(null);
       setSelectItems(null);
       setShowMessage(true);
+      setExample("");
+      setExampleEN("");
+      setExampleFA("");
       const timer = setTimeout(() => setShowMessage(false), 2000);
       return () => clearTimeout(timer);
     }
@@ -81,6 +87,9 @@ const Form = ({ grouped }) => {
     setDesc,
     setRule,
     setTable,
+    setExampleEN,
+    setExampleFA,
+    setExample,
   ]);
 
   return (
@@ -94,6 +103,14 @@ const Form = ({ grouped }) => {
           setEN={setEN}
           FA={FA}
           setFA={setFA}
+          Editable={Editable}
+        />
+      ) : SelectMenu === ArrayOfMenu[8] ? (
+        <Parageraph
+          setShowMessage={setShowMessage}
+          SelectItems={SelectItems}
+          Para={Para}
+          setPara={setPara}
           Editable={Editable}
         />
       ) : SelectMenu === ArrayOfMenu[1] ? (
@@ -130,6 +147,7 @@ const Form = ({ grouped }) => {
           ExampleFA={ExampleFA}
           setExampleFA={setExampleFA}
           Editable={Editable}
+          SelectItems={SelectItems}
         />
       ) : SelectMenu === ArrayOfMenu[5] ? (
         <Tables

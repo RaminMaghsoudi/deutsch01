@@ -13,8 +13,8 @@ import { LuCoffee } from "react-icons/lu";
 import Image from "next/image";
 import U from "../../public/U.jpg";
 import { PiCardsThree } from "react-icons/pi";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { BiChevronRight } from "react-icons/bi";
+import { LuCircleGauge } from "react-icons/lu";
 
 const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
   const router = useRouter();
@@ -198,7 +198,19 @@ const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
                 sx={{ minHeight: "125px", width: "calc(100% - 300px)" }}
               >
                 {GM.items.map((GMI, Index) => (
-                  <div key={Index}>
+                  <div
+                    key={Index}
+                    className={
+                      GMI.Type === "EXAMPLE"
+                        ? classess.EXAMPLE
+                        : GMI.Type === "PARAGERAPH"
+                          ? classess.PARAGERAPH
+                          : ""
+                    }
+                  >
+                    {GMI.Type === "PARAGERAPH" ? (
+                      <Box className={classess.Line}></Box>
+                    ) : null}
                     <Box
                       className={
                         GMI.Type === "DESCRIPTION"
@@ -236,9 +248,20 @@ const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
                           <LuCoffee />
                         </Box>
                       ) : null}
-                      {GMI.Type?.startsWith("TD") || GMI.Type?.startsWith("STD")
-                        ? null
-                        : GMI.Target}
+                      {GMI.Type?.startsWith("TD") ||
+                      GMI.Type?.startsWith("STD") ||
+                      GMI.Type?.startsWith(
+                        "EXAMPLECHILD",
+                      ) ? null : GMI.Type?.startsWith("EXAMPLE") ? (
+                        <>
+                          <LuCircleGauge className={classess.GiCoffeeCup} />
+                          {GMI.Target}
+                          <span className={classess.MdArrowRightAlt}>→</span>
+                          {GM.items[Index + 2]?.Target}
+                        </>
+                      ) : (
+                        GMI.Target
+                      )}
                     </Box>
                     <Box className={classess.TDS}>
                       {fetchTD.map((FTD, INDEX) =>

@@ -70,8 +70,33 @@ export async function Insert(preveState, formData) {
     isInvalidText(formData.get("Target"))
   )
     return { success: false, message: "Ungültig STD !!!" };
+  if (
+    formData.get("Type") !== null &&
+    formData.get("Type") === "EXAMPLE" &&
+    isInvalidText(formData.get("Example"))
+  )
+    return { success: false, message: "Ungültig beispiel !!!" };
+  if (
+    formData.get("Type") !== null &&
+    formData.get("Type") === "PARAGERAPH" &&
+    isInvalidText(formData.get("Target"))
+  )
+    return { success: false, message: "Ungültig Absatz !!!" };
 
-  const result = await insert(formData);
+  let result = null;
+  if (formData.get("Type") === "EXAMPLE") {
+    const examples = [
+      formData.get("Example"),
+      formData.get("ExampleEN"),
+      formData.get("ExampleFA"),
+    ];
+    for (let i = 0; i < examples.length; i++) {
+      formData.set("Target", examples[i]);
+      formData.set("Type", i === 0 ? "EXAMPLE" : "EXAMPLECHILD");
+      result = await insert(formData);
+    }
+  } else result = await insert(formData);
+
   if (!result.success) {
     return {
       success: false,

@@ -12,6 +12,7 @@ import { RxLayers } from "react-icons/rx";
 import { PiLampPendantLight } from "react-icons/pi";
 import { IoMdLocate } from "react-icons/io";
 import { LiaCertificateSolid } from "react-icons/lia";
+import { BsTextParagraph } from "react-icons/bs";
 
 const HeaderAdd = () => {
   const {
@@ -43,6 +44,19 @@ const HeaderAdd = () => {
             >
               <CgController style={{ marginRight: "10px", fontSize: "18px" }} />
               {ArrayOfMenu[0]}
+            </Box>
+            <Box
+              value="Parageraph"
+              className={`${classess.option} ${classess.option2}`}
+              onClick={() => {
+                setSelectMenu(ArrayOfMenu[8]);
+                setShowSelectMenu(false);
+              }}
+            >
+              <BsTextParagraph
+                style={{ marginRight: "10px", fontSize: "18px" }}
+              />
+              {ArrayOfMenu[8]}
             </Box>
             <Box
               value="Desctiption"

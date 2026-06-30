@@ -11,12 +11,13 @@ const Titles = ({
   ExampleFA,
   setExampleFA,
   Editable,
+  SelectItems,
 }) => {
   return (
     <Fragment>
-      {/* <input
+      <input
         type="text"
-        name="Title"
+        name="Example"
         value={Example}
         onChange={(e) => {
           setExample(e.target.value);
@@ -27,7 +28,7 @@ const Titles = ({
       />
       <input
         type="text"
-        name="EN"
+        name="ExampleEN"
         value={ExampleEN}
         onChange={(e) => {
           setExampleEN(e.target.value);
@@ -38,7 +39,7 @@ const Titles = ({
       />
       <input
         type="text"
-        name="FA"
+        name="ExampleFA"
         value={ExampleFA}
         onChange={(e) => {
           setExampleFA(e.target.value);
@@ -48,9 +49,24 @@ const Titles = ({
         placeholder="Beispiele auf Persisch"
       />
       <input type="hidden" name="Type" value="EXAMPLE" />
+      <input
+        type="hidden"
+        name="Title"
+        value={SelectItems?.Title || Editable?.content?.Title || ""}
+      />
+      <input
+        type="hidden"
+        name="EN"
+        value={SelectItems?.EN || Editable?.content?.EN || ""}
+      />
+      <input
+        type="hidden"
+        name="FA"
+        value={SelectItems?.FA || Editable?.content?.FA || ""}
+      />
       {Editable !== null ? (
         <input type="hidden" name="OldTitle" value={Editable.content.Title} />
-      ) : null} */}
+      ) : null}
     </Fragment>
   );
 };
