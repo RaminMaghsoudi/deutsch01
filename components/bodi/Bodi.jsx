@@ -323,7 +323,7 @@ const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
                 minHeight: "200px",
               }}
             >
-              <Box
+              {/* <Box
                 className={classess.CardTitle}
                 sx={{ minHeight: "200px", width: "150px" }}
               >
@@ -338,222 +338,255 @@ const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
                 sx={{ minHeight: "200px", width: "calc(100% - 150px)" }}
               >
                 <Box
-                  className={classess.CIV}
-                  sx={{ minHeight: "200px", width: "25%" }}
+                  className={classess.CardInfoVerbTitle}
+                  sx={{ minHeight: "50px", width: "calc(100% - 150px)" }}
                 >
-                  <span className={classess.CIVText}>Futur</span>
-                  {FAR.Future1.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Future1}
-                    </span>
-                  )}
-                  {FAR.Future2.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Future2}
-                    </span>
-                  )}
-                  {FAR.Future3.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Future3}
-                    </span>
-                  )}
-                  {FAR.Future4.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Future4}
-                    </span>
-                  )}
-                  {FAR.Future5.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Future5}
-                    </span>
-                  )}
-                  {FAR.Future6.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Future6}
-                    </span>
-                  )}
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "25px", width: "25%" }}
+                  >
+                    <span className={classess.CIVText}>Futur</span>
+                  </Box>
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "25px", width: "25%" }}
+                  >
+                    <span className={classess.CIVText}>Perfekt</span>
+                  </Box>
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "25px", width: "25%" }}
+                  >
+                    <span className={classess.CIVText}>Präteritum</span>
+                  </Box>
+                  <Box
+                    className={classess.CIV}
+                    sx={{
+                      minHeight: "25px",
+                      width: "25%",
+                    }}
+                  >
+                    <span className={classess.CIVText}>Präsens</span>
+                  </Box>
                 </Box>
                 <Box
-                  className={classess.CIV}
-                  sx={{ minHeight: "200px", width: "25%" }}
+                  className={classess.CardInfoVerbBodi}
+                  sx={{ minHeight: "175px", width: "calc(100% - 150px)" }}
                 >
-                  <span className={classess.CIVText}>Perfekt</span>
-                  {FAR.Perfect1.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Perfect1}
-                    </span>
-                  )}
-                  {FAR.Perfect2.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Perfect2}
-                    </span>
-                  )}
-                  {FAR.Perfect3.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Perfect3}
-                    </span>
-                  )}
-                  {FAR.Perfect4.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Perfect4}
-                    </span>
-                  )}
-                  {FAR.Perfect5.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Perfect5}
-                    </span>
-                  )}
-                  {FAR.Perfect6.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Perfect6}
-                    </span>
-                  )}
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "175px", width: "25%" }}
+                  >
+                    {FAR.Future1.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Future1}
+                      </span>
+                    )}
+                    {FAR.Future2.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Future2}
+                      </span>
+                    )}
+                    {FAR.Future3.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Future3}
+                      </span>
+                    )}
+                    {FAR.Future4.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Future4}
+                      </span>
+                    )}
+                    {FAR.Future5.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Future5}
+                      </span>
+                    )}
+                    {FAR.Future6.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Future6}
+                      </span>
+                    )}
+                  </Box>
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "175px", width: "25%" }}
+                  >
+                    {FAR.Perfect1.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Perfect1}
+                      </span>
+                    )}
+                    {FAR.Perfect2.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Perfect2}
+                      </span>
+                    )}
+                    {FAR.Perfect3.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Perfect3}
+                      </span>
+                    )}
+                    {FAR.Perfect4.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Perfect4}
+                      </span>
+                    )}
+                    {FAR.Perfect5.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Perfect5}
+                      </span>
+                    )}
+                    {FAR.Perfect6.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Perfect6}
+                      </span>
+                    )}
+                  </Box>
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "175px", width: "25%" }}
+                  >
+                    {FAR.Past1.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Past1}
+                      </span>
+                    )}
+                    {FAR.Past2.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Past2}
+                      </span>
+                    )}
+                    {FAR.Past3.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Past3}
+                      </span>
+                    )}
+                    {FAR.Past4.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Past4}
+                      </span>
+                    )}
+                    {FAR.Past5.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Past5}
+                      </span>
+                    )}
+                    {FAR.Past6.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Past6}
+                      </span>
+                    )}
+                  </Box>
+                  <Box
+                    className={classess.CIV}
+                    sx={{ minHeight: "175px", width: "25%" }}
+                  >
+                    {FAR.Present1.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Present1}
+                      </span>
+                    )}
+                    {FAR.Present2.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Present2}
+                      </span>
+                    )}
+                    {FAR.Present3.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Present3}
+                      </span>
+                    )}
+                    {FAR.Present4.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Present4}
+                      </span>
+                    )}
+                    {FAR.Present5.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Present5}
+                      </span>
+                    )}
+                    {FAR.Present6.length === 0 ? null : (
+                      <span className={classess.CIVText0}>
+                        <BiChevronRight
+                          className={classess.IoMdCheckmarkCircleOutline}
+                        />
+                        {FAR.Present6}
+                      </span>
+                    )}
+                  </Box>
                 </Box>
-                <Box
-                  className={classess.CIV}
-                  sx={{ minHeight: "200px", width: "25%" }}
-                >
-                  <span className={classess.CIVText}>Präteritum</span>
-                  {FAR.Past1.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Past1}
-                    </span>
-                  )}
-                  {FAR.Past2.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Past2}
-                    </span>
-                  )}
-                  {FAR.Past3.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Past3}
-                    </span>
-                  )}
-                  {FAR.Past4.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Past4}
-                    </span>
-                  )}
-                  {FAR.Past5.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Past5}
-                    </span>
-                  )}
-                  {FAR.Past6.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Past6}
-                    </span>
-                  )}
-                </Box>
-                <Box
-                  className={classess.CIV}
-                  sx={{ minHeight: "200px", width: "25%" }}
-                >
-                  <span className={classess.CIVText}>Präsens</span>
-                  {FAR.Present1.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Present1}
-                    </span>
-                  )}
-                  {FAR.Present2.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Present2}
-                    </span>
-                  )}
-                  {FAR.Present3.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Present3}
-                    </span>
-                  )}
-                  {FAR.Present4.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Present4}
-                    </span>
-                  )}
-                  {FAR.Present5.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Present5}
-                    </span>
-                  )}
-                  {FAR.Present6.length === 0 ? null : (
-                    <span className={classess.CIVText0}>
-                      <BiChevronRight
-                        className={classess.IoMdCheckmarkCircleOutline}
-                      />
-                      {FAR.Present6}
-                    </span>
-                  )}
-                </Box>
-              </Box>
+              </Box> */}
             </Box>
           ))
         )

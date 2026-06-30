@@ -83,23 +83,20 @@
 }
 .CardInfoVerb {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: justify;
   border-radius: 0 8px 8px 0;
   color: rgb(0, 0, 0);
   direction: rtl;
   padding: 10px 10px 10px 10px;
-  max-height: fit-content;
 }
 .CIV {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-start;
-  text-align: justify;
-  max-height: fit-content;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .CIVText {
   /* background: linear-gradient(to left, #ffffff 0%, #fdf2f8 80%, #fce7f3 100%);
@@ -348,4 +345,29 @@
   border-radius: 1px;
   margin-left: 15px;
   margin-top: 3px;
+}
+.CardInfoVerbTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  border-radius: 0 8px 8px 0;
+  color: rgb(0, 0, 0);
+  direction: rtl;
+  padding: 10px 10px 10px 10px;
+}
+.CardInfoVerbBodi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  border-radius: 0 8px 8px 0;
+  color: rgb(0, 0, 0);
+  direction: rtl;
+  padding: 10px 10px 10px 10px;
+}
+.CIVT{
+  
 }
