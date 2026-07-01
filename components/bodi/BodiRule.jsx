@@ -6,6 +6,7 @@ import { ImDribbble } from "react-icons/im";
 import { IoPlanetOutline } from "react-icons/io5";
 import { PiLampPendantBold } from "react-icons/pi";
 import { GoCloud } from "react-icons/go";
+import { WiDirectionUpRight } from "react-icons/wi";
 
 const BodiRule = ({ fetchAllRule }) => {
   return (
@@ -61,34 +62,130 @@ const BodiRule = ({ fetchAllRule }) => {
             </Tooltip>
             <Box className={classess.CardInfoVerbTitle}>
               <Box className={classess.CIVT}>
-                <span className={classess.CIVText}>
-                  <ImDribbble className={classess.Iconss} />
-                  Futur
-                </span>
+                <ImDribbble className={classess.Iconss} />
+                Futur
               </Box>
               <Box className={classess.CIVT}>
-                <span className={classess.CIVText}>
-                  <IoPlanetOutline
-                    className={`${classess.Iconss} ${classess.Iconss1}`}
-                  />
-                  Perfekt
-                </span>
+                <IoPlanetOutline
+                  className={`${classess.Iconss} ${classess.Iconss1}`}
+                />
+                Perfekt
               </Box>
               <Box className={classess.CIVT}>
-                <span className={classess.CIVText}>
-                  <PiLampPendantBold
-                    className={`${classess.Iconss} ${classess.Iconss1}`}
-                  />
-                  Präteritum
-                </span>
+                <PiLampPendantBold
+                  className={`${classess.Iconss} ${classess.Iconss1}`}
+                />
+                Präteritum
               </Box>
               <Box className={classess.CIVT}>
-                <span className={classess.CIVText}>
-                  <GoCloud
-                    className={`${classess.Iconss} ${classess.Iconss1}`}
-                  />
-                  Präsens
-                </span>
+                <GoCloud className={`${classess.Iconss} ${classess.Iconss1}`} />
+                Präsens
+              </Box>
+            </Box>
+            <Box className={classess.CardInfoVerbTitle1}>
+              <Box className={classess.CIVT1}>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Future1}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Future2}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Future3}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Future4}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Future5}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Future6}
+                </Box>
+              </Box>
+              <Box className={classess.CIVT1}>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Perfect1}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Perfect2}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Perfect3}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Perfect4}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Perfect5}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Perfect6}
+                </Box>
+              </Box>
+              <Box className={classess.CIVT1}>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Past1}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Past2}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Past3}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Past4}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Past5}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Past6}
+                </Box>
+              </Box>
+              <Box className={classess.CIVT1}>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Present1}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Present2}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Present3}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Present4}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Present5}
+                </Box>
+                <Box className={classess.Text1}>
+                  <WiDirectionUpRight className={classess.WiDirectionUpRight} />
+                  {FAR.Present6}
+                </Box>
               </Box>
             </Box>
           </Box>
