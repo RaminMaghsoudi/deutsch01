@@ -151,9 +151,18 @@ const Bodi = ({ grouped, fetchTD, fetchSTD, fetchAllRule }) => {
           Editable={Editable}
           SelectItems={SelectItems}
           handleContextMenu={handleContextMenu}
+          fetchTD={fetchTD}
+          fetchSTD={fetchSTD}
+          contextMenu={contextMenu}
+          setContextMenu={setContextMenu}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          handleDeleteTarget={handleDeleteTarget}
+          handleTD={handleTD}
+          handleSTD={handleSTD}
         />
       ) : SelectMainMenu === ArrayOfMainMenu[1] ? (
-        <BodiRule />
+        <BodiRule fetchAllRule={fetchAllRule} />
       ) : null}
     </Box>
   );

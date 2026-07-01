@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Tooltip } from "@mui/material";
 import React from "react";
 import classess from "./Bodi.module.css";
@@ -6,6 +8,7 @@ import { BsWindows } from "react-icons/bs";
 import { BsCheck2All } from "react-icons/bs";
 import { LuCoffee } from "react-icons/lu";
 import { LuCircleGauge } from "react-icons/lu";
+import Menus from "../menus/Menus";
 
 const BodiDesc = ({
   grouped,
@@ -14,6 +17,15 @@ const BodiDesc = ({
   Editable,
   SelectItems,
   handleContextMenu,
+  fetchTD,
+  fetchSTD,
+  contextMenu,
+  setContextMenu,
+  handleEdit,
+  handleDelete,
+  handleDeleteTarget,
+  handleTD,
+  handleSTD,
 }) => {
   return (
     <Box className={classess.BodiDesc}>
@@ -82,10 +94,12 @@ const BodiDesc = ({
               onContextMenu={(e) => handleContextMenu(e, GM, "CT")}
             >
               <BsWindows className={classess.BsWindows} />
-              <span className={classess.CardEN}>
-                {GM.EN.length === 0 ? null : GM.EN}
-              </span>
-              <span className={classess.CardTitle}>{GM.Title}</span>
+              <div className={classess.CH}>
+                <span className={classess.CardEN}>
+                  {GM.EN.length === 0 ? null : GM.EN}
+                </span>
+                <span className={classess.CardTitle}>{GM.Title}</span>
+              </div>
             </Tooltip>
             {GM.items.map((GMI, Index) => (
               <div
@@ -158,8 +172,43 @@ const BodiDesc = ({
                     GMI.Target
                   )}
                 </Box>
+                <Box className={classess.TDS}>
+                  {fetchTD.map((FTD, INDEX) =>
+                    GMI.Type?.startsWith("TABLE") &&
+                    GMI.Type !== null &&
+                    Number(FTD.Type.split("-")[1]) === GMI.id ? (
+                      <Box key={INDEX}>
+                        <Box
+                          className={classess.TD}
+                          onContextMenu={(e) =>
+                            handleContextMenu(e, FTD, "CTD")
+                          }
+                        >
+                          {FTD.Target}
+                        </Box>
+                        {fetchSTD.map((FSTD, INDEX) =>
+                          Number(FSTD.Type.split("-")[1]) === FTD.id ? (
+                            <Box key={INDEX} className={classess.STDS}>
+                              {FSTD.Target}
+                            </Box>
+                          ) : null,
+                        )}
+                      </Box>
+                    ) : null,
+                  )}
+                </Box>
               </div>
             ))}
+            <Menus
+              contextMenu={contextMenu}
+              setContextMenu={setContextMenu}
+              card={contextMenu !== null && contextMenu.status}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              handleDeleteTarget={handleDeleteTarget}
+              handleTD={handleTD}
+              handleSTD={handleSTD}
+            />
           </Box>
         ))
       )}

@@ -46,6 +46,9 @@
 .BodiDesc {
   width: calc(100% - 70px);
 }
+.BodiRule {
+  width: calc(100% - 70px);
+}
 .Card {
   min-width: 100%;
   min-height: 50px;
@@ -64,27 +67,38 @@
 }
 .CardHeader {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   max-width: fit-content;
   min-height: 40px;
   margin-left: 15px;
   justify-content: center;
-  margin-top: 5px;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
   border-radius: 2px;
 }
+.CH {
+  display: flex;
+  flex-direction: column;
+}
 .BsWindows {
-  position: absolute;
   font-size: 27px;
   width: 30px;
   min-height: 30px;
-  color: rgb(245, 241, 179);
+  color: rgb(179, 230, 245);
+}
+.IoGrid {
+  font-size: 27px;
+  width: 30px;
+  min-height: 30px;
+  color: rgb(179, 245, 193);
 }
 .CardEN {
   font-family: CL;
   font-size: 0.85rem;
   text-transform: uppercase;
   color: gray;
-  margin-left: 40px;
+  margin-left: 20px;
 }
 .CardTitle {
   font-family: CL;
@@ -93,7 +107,7 @@
   font-family: CB;
   font-size: 1.1rem;
   margin-top: -3px;
-  margin-left: 40px;
+  margin-left: 20px;
 }
 .Div {
   width: 100%;
@@ -242,4 +256,85 @@
   align-items: center;
   justify-content: flex-start;
   padding: 5px 10px 0px 10px;
+}
+.TDS {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3px;
+}
+.TD {
+  width: auto;
+  padding: 5px 10px 5px 10px;
+  /* background: linear-gradient(to bottom, #ffffff, #fff8b0); */
+  background-color: rgba(60, 255, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 3px;
+  border-radius: 3px;
+  margin-left: 3px;
+  border: 1px solid rgba(9, 36, 1, 0.2);
+}
+.STDS {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #ffffff;
+  /* background-color: rgba(195, 197, 195, 0.5); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  border-radius: 3px;
+  border: 1px solid rgba(9, 36, 1, 0.2);
+}
+.CardInfoVerbTitle {
+  display: flex;
+  flex-direction: row-reverse;
+  width: calc(100% - 40px);
+  font-family: CL;
+  color: rgb(0, 41, 31);
+  min-height: 35px;
+  margin-left: 20px;
+  font-size: 1.1rem;
+}
+.CIVT {
+  width: 25%;
+  min-height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-transform: uppercase;
+}
+.Iconss {
+  position: relative;
+  font-size: 17px;
+  top: 3px;
+  width: 17px;
+  min-height: 17px;
+  margin-right: 8px;
+}
+.Iconss1 {
+  font-size: 20px;
+  width: 20px;
+  min-height: 20px;
+}
+.CardInfoVerb {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px);
+  font-family: CL;
+  color: rgb(0, 41, 31);
+  min-height: 35px;
+  max-height: fit-content;
+  margin-left: 20px;
+  font-size: 0.9rem;
 }
